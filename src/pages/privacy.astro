@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Privacy Policy - SVG Clean Kit"
+  description="SVG Clean Kit's privacy commitment. 100% client-side SVG optimization with zero server uploads, zero tracking, and zero telemetry."
+>
+  <Header />
+
+  <main class="py-14 sm:py-20 bg-[var(--color-canvas)]">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6">
+      
+      <!-- Page Header -->
+      <div class="border-b border-[var(--color-hairline)] pb-8">
+        <div class="inline-flex items-center gap-2 mb-3">
+          <span class="inline-block h-2 w-2 rounded-full bg-emerald-500"></span>
+          <span class="font-mono text-xs font-medium uppercase tracking-wider text-[var(--color-mute)]">
+            Privacy First
+          </span>
+        </div>
+        <h1 class="font-sans text-3xl font-semibold tracking-[-1.5px] text-[var(--color-ink)] sm:text-4xl">
+          Privacy Policy
+        </h1>
+        <p class="mt-2 font-mono text-xs text-[var(--color-mute)]">
+          Last updated: October 2026 • Effective immediately
+        </p>
+      </div>
+
+      <!-- Content Sections in Geist Hairline Container -->
+      <div class="mt-10 space-y-8 text-sm leading-relaxed text-[var(--color-body)]">
+        
+        <section class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+          <h2 class="font-sans text-lg font-semibold text-[var(--color-ink)]">
+            1. Our Core Principle: Zero Server Transmission
+          </h2>
+          <p class="mt-3">
+            At <strong>SVG Clean Kit</strong> (<a href="https://svgcleankit.pages.dev" class="text-[var(--color-link)] underline">svgcleankit.pages.dev</a>), privacy is not an afterthought or a policy toggle — it is the fundamental architectural constraint of the software.
+          </p>
+          <p class="mt-3">
+            When you drag and drop an SVG file, browse your local drive, or paste raw SVG markup into our tool, <strong>your files are never uploaded to our servers, stored in any database, or transmitted across the internet</strong>. All parsing, minification, path calculation, and ZIP packaging are performed locally within your browser sandbox using client-side WebAssembly and JavaScript engines.
+          </p>
+        </section>
+
+        <section class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+          <h2 class="font-sans text-lg font-semibold text-[var(--color-ink)]">
+            2. Information We Do Not Collect
+          </h2>
+          <ul class="mt-3 list-disc space-y-2 pl-5">
+            <li><strong>Vector graphics and assets:</strong> We have zero access to your SVG code, artwork, logos, illustrations, or coordinates.</li>
+            <li><strong>Personal identifying information:</strong> We do not require accounts, logins, email addresses, passwords, or registration.</li>
+            <li><strong>Third-party tracker cookies:</strong> We do not utilize intrusive advertising pixels, marketing trackers, or behavior profiling networks.</li>
+          </ul>
+        </section>
+
+        <section class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+          <h2 class="font-sans text-lg font-semibold text-[var(--color-ink)]">
+            3. Local Browser Storage
+          </h2>
+          <p class="mt-3">
+            The only data saved to your browser's local storage (<code class="font-mono text-xs bg-[var(--color-hairline-soft)] px-1.5 py-0.5 rounded-[4px] text-[var(--color-ink)]">localStorage</code>) is your visual theme preference (<code class="font-mono text-xs bg-[var(--color-hairline-soft)] px-1.5 py-0.5 rounded-[4px] text-[var(--color-ink)]">'light'</code> or <code class="font-mono text-xs bg-[var(--color-hairline-soft)] px-1.5 py-0.5 rounded-[4px] text-[var(--color-ink)]">'dark'</code>). This setting stays strictly on your device to remember your interface preferences between visits.
+          </p>
+        </section>
+
+        <section class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+          <h2 class="font-sans text-lg font-semibold text-[var(--color-ink)]">
+            4. Offline Capability
+          </h2>
+          <p class="mt-3">
+            Because SVG Clean Kit is built as a static application, you can load the website, disconnect your device from the internet (e.g., Airplane mode), and continue optimizing sensitive vector graphics with complete peace of mind.
+          </p>
+        </section>
+
+        <section class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+          <h2 class="font-sans text-lg font-semibold text-[var(--color-ink)]">
+            5. Contact Information
+          </h2>
+          <p class="mt-3">
+            If you have questions regarding this Privacy Policy or vector privacy in general, please visit our <a href="/contact" class="text-[var(--color-link)] underline">Contact Page</a>.
+          </p>
+        </section>
+
+      </div>
+
+      <div class="mt-10 pt-6 border-t border-[var(--color-hairline)] flex justify-between items-center text-xs">
+        <a href="/" class="text-[var(--color-ink)] font-medium hover:underline">&larr; Back to Optimizer</a>
+        <a href="/terms" class="text-[var(--color-body)] hover:text-[var(--color-ink)]">Read Terms of Service &rarr;</a>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

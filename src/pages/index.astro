@@ -1,17 +1,45 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import OptimizerApp from '../components/OptimizerApp.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import SeoContentSection from '../components/SeoContentSection.astro';
+import GuideSection from '../components/GuideSection.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Footer from '../components/Footer.astro';
+import { faqs } from '../lib/faqs';
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a,
+    },
+  })),
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="SVG Optimizer Online – Compress, Clean & Reduce SVG File Size | SVG Clean Kit"
+  description="Free SVG optimizer online to compress, clean, and minify SVG vector files. Reduce SVG file size by up to 80% without losing quality. 100% private, client-side SVG cleaner with JSX & Data URI export."
+  keywords="svg optimizer, svg optimizer online, online svg optimizer, svg compressor, svg cleaner, reduce svg file size, svg minifier online, compress svg, clean svg, minify svg, svg file size reducer, svgo online, free svg optimizer, svg code cleaner, react svg jsx converter"
+  structuredData={faqSchema}
+>
+  <Header />
+  <main>
+    <Hero />
+    <OptimizerApp />
+    <FeatureGrid />
+    <SeoContentSection />
+    <GuideSection />
+    <FaqSection />
+    <CtaBand />
+  </main>
+  <Footer />
+</Layout>

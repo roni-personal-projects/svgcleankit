@@ -1,0 +1,308 @@
+---
+---
+
+<section id="guide" class="border-b border-[var(--color-hairline)] bg-[var(--color-canvas)] py-16 sm:py-24">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6">
+    
+    <!-- Section Eyebrow & Title -->
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2">
+        <span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-ink)]"></span>
+        <span class="font-mono text-xs font-medium uppercase tracking-wider text-[var(--color-mute)]">
+          Technical Reference &bull; SEO Documentation
+        </span>
+      </div>
+      <h2 class="mt-3 font-sans text-2xl font-semibold tracking-[-1.2px] text-[var(--color-ink)] sm:text-4xl sm:leading-[1.15]">
+        The Definitive Guide to SVG Optimization: How Our Online SVG Optimizer Reduces File Size Without Quality Loss
+      </h2>
+      <p class="mt-3 text-sm leading-relaxed text-[var(--color-body)] sm:text-base">
+        Learn how an <strong>online svg optimizer</strong> strips redundant XML overhead, why vector bloat hurts search rankings and web vitals, and how our free <strong>svg compressor</strong> and <strong>svg cleaner</strong> achieve up to 80% file size reduction.
+      </p>
+    </div>
+
+    <!-- Quick Stats Metric Band -->
+    <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-4 text-center">
+        <div class="font-mono text-2xl font-bold tracking-tight text-emerald-600 sm:text-3xl">-60% to -80%</div>
+        <div class="mt-1 text-xs text-[var(--color-mute)]">Typical File Size Reduction</div>
+      </div>
+      <div class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-4 text-center">
+        <div class="font-mono text-2xl font-bold tracking-tight text-[var(--color-ink)] sm:text-3xl">0 ms</div>
+        <div class="mt-1 text-xs text-[var(--color-mute)]">Server Latency (In-Browser)</div>
+      </div>
+      <div class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-4 text-center">
+        <div class="font-mono text-2xl font-bold tracking-tight text-[var(--color-ink)] sm:text-3xl">100%</div>
+        <div class="mt-1 text-xs text-[var(--color-mute)]">Vector Visual Fidelity</div>
+      </div>
+      <div class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-4 text-center">
+        <div class="font-mono text-2xl font-bold tracking-tight text-emerald-600 sm:text-3xl">Zero</div>
+        <div class="mt-1 text-xs text-[var(--color-mute)]">Remote Cloud Uploads</div>
+      </div>
+    </div>
+
+    <!-- Article Content Chapters -->
+    <div class="mt-12 space-y-10 text-sm leading-relaxed text-[var(--color-body)]">
+      
+      <!-- Chapter 1 -->
+      <article class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+        <div class="flex items-center gap-2 text-xs font-mono text-[var(--color-mute)]">
+          <span class="rounded bg-[var(--color-hairline-soft)] px-1.5 py-0.5 font-semibold text-[var(--color-ink)]">01</span>
+          <span>UNDERSTANDING VECTOR BLOAT</span>
+        </div>
+        <h3 class="mt-3 font-sans text-xl font-semibold tracking-tight text-[var(--color-ink)] sm:text-2xl">
+          What is an SVG Optimizer and Why is It Essential for Modern Websites?
+        </h3>
+        <div class="mt-4 space-y-3">
+          <p>
+            Scalable Vector Graphics (SVG) are the gold standard for icons, logos, charts, and user interface graphics. Unlike raster images (JPEG, PNG, WebP) that store static pixel grids, an SVG is an XML-based document describing 2D shapes, coordinates, curves, strokes, and colors mathematically.
+          </p>
+          <p>
+            However, popular design suites like <strong>Figma, Adobe Illustrator, Sketch, and Inkscape</strong> are authoring tools rather than web delivery compilers. When exporting SVGs, these applications inject considerable overhead: editor namespaces, undo histories, metadata packets, nested group containers, and coordinate numbers reaching 8 or 9 decimal places. In practical terms, <strong>between 40% and 80% of an exported SVG consists of invisible bloat</strong> that browsers do not need for visual rendering.
+          </p>
+          <p>
+            An <strong>online svg optimizer</strong> purges this unnecessary code. By parsing the underlying XML tree and simplifying geometric path data, our dedicated <strong>svg optimizer online</strong> allows developers to <strong>reduce svg file size</strong> drastically while preserving 100% visual fidelity on standard and Retina displays.
+          </p>
+        </div>
+      </article>
+
+      <!-- Chapter 2 -->
+      <article class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+        <div class="flex items-center gap-2 text-xs font-mono text-[var(--color-mute)]">
+          <span class="rounded bg-[var(--color-hairline-soft)] px-1.5 py-0.5 font-semibold text-[var(--color-ink)]">02</span>
+          <span>HOW COMPRESSION WORKS</span>
+        </div>
+        <h3 class="mt-3 font-sans text-xl font-semibold tracking-tight text-[var(--color-ink)] sm:text-2xl">
+          How Our SVG Cleaner and SVG Compressor Compresses Code Under the Hood
+        </h3>
+        <div class="mt-4 space-y-3">
+          <p>
+            SVGCleanKit acts as both an automated <strong>svg cleaner</strong> and an advanced <strong>svg compressor</strong>, executing the SVGO optimization engine directly within your browser. Here is how our tool reduces payload weight:
+          </p>
+          
+          <div class="grid grid-cols-1 gap-3 pt-2 md:grid-cols-2">
+            <div class="rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <h4 class="font-sans text-xs font-semibold uppercase tracking-wide text-[var(--color-ink)]">1. Decimal Precision Truncation</h4>
+              <p class="mt-1 text-xs text-[var(--color-body)]">
+                Design editors export coordinates with excessive micro-precision. Rounding path numbers to 2 or 3 decimal places immediately reduces file size by 20% to 35% without visible alteration.
+              </p>
+            </div>
+            
+            <div class="rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <h4 class="font-sans text-xs font-semibold uppercase tracking-wide text-[var(--color-ink)]">2. Stripping Metadata &amp; Namespaces</h4>
+              <p class="mt-1 text-xs text-[var(--color-body)]">
+                Our <strong>svg cleaner</strong> purges proprietary namespaces like <code class="font-mono text-emerald-600">xmlns:inkscape</code> and <code class="font-mono text-emerald-600">xmlns:sketch</code>, along with editor comments, RDF tags, and DOCTYPE headers.
+              </p>
+            </div>
+
+            <div class="rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <h4 class="font-sans text-xs font-semibold uppercase tracking-wide text-[var(--color-ink)]">3. Collapsing Empty Containers</h4>
+              <p class="mt-1 text-xs text-[var(--color-body)]">
+                Nested <code class="font-mono text-emerald-600">&lt;g&gt;</code> groups created during design exploration are flattened, combining transform matrices and pruning empty nodes to lighten DOM overhead.
+              </p>
+            </div>
+
+            <div class="rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <h4 class="font-sans text-xs font-semibold uppercase tracking-wide text-[var(--color-ink)]">4. Path Segment Simplification</h4>
+              <p class="mt-1 text-xs text-[var(--color-body)]">
+                The <strong>svg compressor</strong> alternates between absolute (<code class="font-mono text-emerald-600">M, L</code>) and relative (<code class="font-mono text-emerald-600">m, l</code>) commands based on which consumes fewer bytes, consolidating straight-line runs.
+              </p>
+            </div>
+
+            <div class="rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <h4 class="font-sans text-xs font-semibold uppercase tracking-wide text-[var(--color-ink)]">5. Color Notation Minification</h4>
+              <p class="mt-1 text-xs text-[var(--color-body)]">
+                Verbose colors such as <code class="font-mono text-emerald-600">#ffffff</code> are compressed to their 3-digit shorthand <code class="font-mono text-emerald-600">#fff</code>, and presentation attributes are normalized for CSS theming.
+              </p>
+            </div>
+
+            <div class="rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <h4 class="font-sans text-xs font-semibold uppercase tracking-wide text-[var(--color-ink)]">6. Defs &amp; ClipPath Cleanup</h4>
+              <p class="mt-1 text-xs text-[var(--color-body)]">
+                Unused gradients, patterns, and clip masks left inside <code class="font-mono text-emerald-600">&lt;defs&gt;</code> are identified and purged so only actively referenced elements remain.
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Chapter 3 -->
+      <article class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+        <div class="flex items-center gap-2 text-xs font-mono text-[var(--color-mute)]">
+          <span class="rounded bg-[var(--color-hairline-soft)] px-1.5 py-0.5 font-semibold text-[var(--color-ink)]">03</span>
+          <span>CORE WEB VITALS &amp; SEO IMPACT</span>
+        </div>
+        <h3 class="mt-3 font-sans text-xl font-semibold tracking-tight text-[var(--color-ink)] sm:text-2xl">
+          Why You Must Reduce SVG File Size for Web Performance and Technical SEO
+        </h3>
+        <div class="mt-4 space-y-3">
+          <p>
+            Page speed is a primary Google search ranking signal. When you <strong>reduce svg file size</strong>, your website achieves tangible improvements across Google Core Web Vitals:
+          </p>
+          <ul class="list-disc space-y-2 pl-5">
+            <li>
+              <strong>Largest Contentful Paint (LCP):</strong> Prominent vector graphics used in hero headers or logos influence LCP scores. Compressing heavy SVGs ensures fast first-paint times and higher search rankings.
+            </li>
+            <li>
+              <strong>Cumulative Layout Shift (CLS):</strong> Properly cleaned SVGs with explicit <code class="font-mono text-xs">viewBox</code> attributes prevent sudden visual reflows while graphics load.
+            </li>
+            <li>
+              <strong>DOM Tree Efficiency:</strong> When inlining SVGs into React, Next.js, or Astro components, each shape adds a node to the DOM. A bloated graphic can add hundreds of unnecessary DOM elements. Using an <strong>svg minifier online</strong> keeps your DOM compact and prevents rendering stutter.
+            </li>
+            <li>
+              <strong>Bandwidth Savings on Mobile Networks:</strong> Streamlined vector assets load significantly faster on cellular connections, decreasing bounce rates among mobile visitors.
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Chapter 4 -->
+      <article class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+        <div class="flex items-center gap-2 text-xs font-mono text-[var(--color-mute)]">
+          <span class="rounded bg-[var(--color-hairline-soft)] px-1.5 py-0.5 font-semibold text-[var(--color-ink)]">04</span>
+          <span>PRIVACY &amp; SECURITY</span>
+        </div>
+        <h3 class="mt-3 font-sans text-xl font-semibold tracking-tight text-[var(--color-ink)] sm:text-2xl">
+          Client-Side SVG Cleaner vs Cloud Converters: Privacy and Sanitization
+        </h3>
+        <div class="mt-4 space-y-3">
+          <p>
+            Many legacy conversion utilities upload your vector graphics to external servers. This presents confidentiality issues when working with unreleased logos, client branding, or proprietary application designs.
+          </p>
+          <p>
+            Additionally, raw SVG files can carry malicious scripts, external entity calls, or dangerous event handlers like <code class="font-mono text-xs">onload</code> that trigger Cross-Site Scripting (XSS).
+          </p>
+          <p>
+            SVGCleanKit provides complete peace of mind:
+          </p>
+          <div class="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-3">
+            <div class="rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <div class="font-mono text-xs font-semibold text-[var(--color-ink)]">100% Client-Side Privacy</div>
+              <p class="mt-1 text-xs text-[var(--color-body)]">
+                Files are processed exclusively in your browser memory. Your artwork never touches an external cloud server.
+              </p>
+            </div>
+            <div class="rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <div class="font-mono text-xs font-semibold text-[var(--color-ink)]">Automated Sanitization</div>
+              <p class="mt-1 text-xs text-[var(--color-body)]">
+                Our <strong>svg cleaner</strong> strips active script tags and dangerous handlers to ensure safe production markup.
+              </p>
+            </div>
+            <div class="rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <div class="font-mono text-xs font-semibold text-[var(--color-ink)]">Zero Latency &amp; Offline Mode</div>
+              <p class="mt-1 text-xs text-[var(--color-body)]">
+                With zero network hops, optimization is instantaneous. The tool works reliably even when disconnected from the web.
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Chapter 5 -->
+      <article class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+        <div class="flex items-center gap-2 text-xs font-mono text-[var(--color-mute)]">
+          <span class="rounded bg-[var(--color-hairline-soft)] px-1.5 py-0.5 font-semibold text-[var(--color-ink)]">05</span>
+          <span>STEP-BY-STEP GUIDE</span>
+        </div>
+        <h3 class="mt-3 font-sans text-xl font-semibold tracking-tight text-[var(--color-ink)] sm:text-2xl">
+          Step-by-Step: How to Use Our SVG Minifier Online
+        </h3>
+        <div class="mt-4 space-y-3">
+          <p>
+            Compressing your vector assets with SVGCleanKit takes only seconds with this simple workflow:
+          </p>
+          <div class="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
+            <div class="flex gap-3 rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-ink)] text-xs font-bold text-[var(--color-canvas)]">1</div>
+              <div>
+                <h4 class="font-sans text-xs font-semibold text-[var(--color-ink)]">Upload or Paste Markup</h4>
+                <p class="mt-0.5 text-xs text-[var(--color-body)]">
+                  Drag and drop up to 20 files, select from disk, or paste raw SVG XML directly from your clipboard.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-3 rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-ink)] text-xs font-bold text-[var(--color-canvas)]">2</div>
+              <div>
+                <h4 class="font-sans text-xs font-semibold text-[var(--color-ink)]">Inspect Visual Quality</h4>
+                <p class="mt-0.5 text-xs text-[var(--color-body)]">
+                  Use the interactive split slider to compare original versus compressed output across dark and light canvases.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-3 rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-ink)] text-xs font-bold text-[var(--color-canvas)]">3</div>
+              <div>
+                <h4 class="font-sans text-xs font-semibold text-[var(--color-ink)]">Tune Optimization Switches</h4>
+                <p class="mt-0.5 text-xs text-[var(--color-body)]">
+                  Pick curated presets or adjust coordinate decimal precision, container flattening, and metadata stripping.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-3 rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3.5">
+              <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-ink)] text-xs font-bold text-[var(--color-canvas)]">4</div>
+              <div>
+                <h4 class="font-sans text-xs font-semibold text-[var(--color-ink)]">Export to Code or ZIP</h4>
+                <p class="mt-0.5 text-xs text-[var(--color-body)]">
+                  Download the cleaned <code class="font-mono text-xs">.svg</code>, copy React JSX with camelCase props, generate a Data URI, or export batch ZIP files.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Chapter 6 -->
+      <article class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8">
+        <div class="flex items-center gap-2 text-xs font-mono text-[var(--color-mute)]">
+          <span class="rounded bg-[var(--color-hairline-soft)] px-1.5 py-0.5 font-semibold text-[var(--color-ink)]">06</span>
+          <span>PRO TIPS &amp; BEST PRACTICES</span>
+        </div>
+        <h3 class="mt-3 font-sans text-xl font-semibold tracking-tight text-[var(--color-ink)] sm:text-2xl">
+          Vector Optimization Best Practices for Designers and Web Developers
+        </h3>
+        <div class="mt-4 space-y-3">
+          <p>
+            To achieve maximum compression ratios when using an <strong>svg optimizer online</strong>, integrate these vector design habits into your workflow:
+          </p>
+          <ul class="list-disc space-y-2 pl-5">
+            <li>
+              <strong>Unify Vector Shapes:</strong> Combine overlapping paths with Pathfinder or Boolean Union operations before exporting from Figma or Illustrator to eliminate hidden path segments.
+            </li>
+            <li>
+              <strong>Convert Text to Outlines:</strong> Outline fonts to avoid layout rendering anomalies if external web fonts fail to load.
+            </li>
+            <li>
+              <strong>Adopt Consistent ViewBoxes:</strong> Standardize on an explicit <code class="font-mono text-xs">viewBox</code> attribute (e.g. <code class="font-mono text-xs">0 0 24 24</code>) rather than fixed pixel dimensions for responsive sizing.
+            </li>
+            <li>
+              <strong>Maintain 2 or 3 Decimal Precision:</strong> For standard icons and logos, 2 or 3 decimals deliver sub-pixel precision while cutting file weight. Higher precision is only necessary for intricate scientific charts.
+            </li>
+            <li>
+              <strong>Clean Icons Before Git Commits:</strong> Run assets through SVGCleanKit before committing to your repository to keep codebases lean and maintain clean diffs.
+            </li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Bottom Quick Jump CTA -->
+    <div class="mt-12 flex flex-col items-center justify-between gap-4 rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 text-center sm:flex-row sm:text-left">
+      <div>
+        <h4 class="font-sans text-base font-semibold text-[var(--color-ink)]">
+          Ready to reduce your SVG file size?
+        </h4>
+        <p class="text-xs text-[var(--color-mute)]">
+          Paste your vector markup or drop files into our free online SVG optimizer.
+        </p>
+      </div>
+      <a
+        href="#app"
+        class="inline-flex h-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] px-5 text-xs font-medium text-[var(--color-on-primary)] transition-opacity hover:opacity-90 active:scale-98"
+      >
+        Optimize SVGs Now
+      </a>
+    </div>
+
+  </div>
+</section>

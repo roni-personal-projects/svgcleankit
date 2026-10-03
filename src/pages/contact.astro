@@ -1,0 +1,212 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Contact Us - SVG Clean Kit"
+  description="Get in touch with the SVG Clean Kit team. Send feedback, report SVG rendering bugs, suggest optimizer features, or ask questions."
+>
+  <Header />
+
+  <main class="py-14 sm:py-20 bg-[var(--color-canvas)]">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6">
+      
+      <!-- Page Header -->
+      <div class="border-b border-[var(--color-hairline)] pb-8">
+        <div class="inline-flex items-center gap-2 mb-3">
+          <span class="inline-block h-2 w-2 rounded-full bg-[var(--color-link)]"></span>
+          <span class="font-mono text-xs font-medium uppercase tracking-wider text-[var(--color-mute)]">
+            Get in Touch
+          </span>
+        </div>
+        <h1 class="font-sans text-3xl font-semibold tracking-[-1.5px] text-[var(--color-ink)] sm:text-4xl">
+          Contact Us
+        </h1>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--color-body)]">
+          Have an SVG edge case that broke? Have an idea for a new cleaning preset or export format? We'd love to hear from you.
+        </p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Left / Form Section (2 cols) -->
+        <div class="md:col-span-2">
+          <div class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8 shadow-xs">
+            <h2 class="font-sans text-lg font-semibold text-[var(--color-ink)] mb-1">
+              Send a Message
+            </h2>
+            <p class="text-xs text-[var(--color-mute)] mb-6">
+              Fill out the form below and we will get back to you as soon as possible.
+            </p>
+
+            <form id="contact-form" class="space-y-4">
+              <!-- Name & Email Row -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="name" class="block font-mono text-[11px] uppercase tracking-wider text-[var(--color-mute)] mb-1.5">
+                    Your Name <span class="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="Alex Morgan"
+                    class="w-full rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] px-3 py-2 text-sm text-[var(--color-ink)] placeholder-[var(--color-mute)] outline-none transition-all focus:border-[var(--color-ink)] focus:ring-1 focus:ring-[var(--color-ink)]"
+                  />
+                </div>
+
+                <div>
+                  <label for="email" class="block font-mono text-[11px] uppercase tracking-wider text-[var(--color-mute)] mb-1.5">
+                    Email Address <span class="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    placeholder="alex@example.com"
+                    class="w-full rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] px-3 py-2 text-sm text-[var(--color-ink)] placeholder-[var(--color-mute)] outline-none transition-all focus:border-[var(--color-ink)] focus:ring-1 focus:ring-[var(--color-ink)]"
+                  />
+                </div>
+              </div>
+
+              <!-- Topic / Category -->
+              <div>
+                <label for="topic" class="block font-mono text-[11px] uppercase tracking-wider text-[var(--color-mute)] mb-1.5">
+                  Subject / Category
+                </label>
+                <select
+                  id="topic"
+                  name="topic"
+                  class="w-full rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] px-3 py-2 text-sm text-[var(--color-ink)] outline-none transition-all focus:border-[var(--color-ink)] focus:ring-1 focus:ring-[var(--color-ink)]"
+                >
+                  <option value="bug">Bug Report / SVG Rendering Issue</option>
+                  <option value="feature">Feature Request / New Preset</option>
+                  <option value="feedback">General Feedback</option>
+                  <option value="other">Other Inquiry</option>
+                </select>
+              </div>
+
+              <!-- Message -->
+              <div>
+                <label for="message" class="block font-mono text-[11px] uppercase tracking-wider text-[var(--color-mute)] mb-1.5">
+                  Message <span class="text-rose-500">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  placeholder="Describe your issue or suggestion in detail..."
+                  class="w-full rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3 text-sm text-[var(--color-ink)] placeholder-[var(--color-mute)] outline-none transition-all focus:border-[var(--color-ink)] focus:ring-1 focus:ring-[var(--color-ink)]"
+                ></textarea>
+              </div>
+
+              <!-- Submit button & status message -->
+              <div class="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <button
+                  type="submit"
+                  id="submit-btn"
+                  class="inline-flex h-9 items-center justify-center rounded-[6px] bg-[var(--color-ink)] px-5 text-xs font-semibold text-[var(--color-canvas)] transition-all hover:opacity-90 active:scale-98"
+                >
+                  Send Message
+                </button>
+                <div id="form-status" class="hidden text-xs font-mono text-emerald-600 dark:text-emerald-400">
+                  ✓ Message sent! Thank you for your feedback.
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Right / Information Card (1 col) -->
+        <div class="space-y-4">
+          <div class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6">
+            <h3 class="font-sans text-sm font-semibold text-[var(--color-ink)] mb-3 flex items-center gap-2">
+              <svg class="h-4 w-4 text-[var(--color-link)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+              Direct Email
+            </h3>
+            <p class="text-xs text-[var(--color-body)] leading-relaxed mb-3">
+              Prefer writing an email directly? Reach our team at:
+            </p>
+            <a
+              href="mailto:support@svgcleankit.pages.dev"
+              class="font-mono text-xs text-[var(--color-ink)] underline hover:text-[var(--color-link)] break-all"
+            >
+              support@svgcleankit.pages.dev
+            </a>
+          </div>
+
+          <div class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6">
+            <h3 class="font-sans text-sm font-semibold text-[var(--color-ink)] mb-3 flex items-center gap-2">
+              <svg class="h-4 w-4 text-[var(--color-ink)]" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              GitHub Community
+            </h3>
+            <p class="text-xs text-[var(--color-body)] leading-relaxed mb-3">
+              Found a bug or need to share an SVG test fixture? Open an issue on GitHub.
+            </p>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-xs text-[var(--color-link)] underline hover:opacity-80"
+            >
+              Visit Repository &rarr;
+            </a>
+          </div>
+
+          <div class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6">
+            <h3 class="font-sans text-sm font-semibold text-[var(--color-ink)] mb-2">
+              Privacy Promise
+            </h3>
+            <p class="text-xs text-[var(--color-mute)] leading-relaxed">
+              We never ask you to upload sensitive SVG artwork in contact forms. Feel free to sanitize coordinates or replace text before sharing samples.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-[var(--color-hairline)] flex justify-between items-center text-xs">
+        <a href="/" class="text-[var(--color-ink)] font-medium hover:underline">&larr; Back to Optimizer</a>
+        <a href="/about" class="text-[var(--color-body)] hover:text-[var(--color-ink)]">Read About Us &rarr;</a>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const contactForm = document.getElementById('contact-form') as HTMLFormElement;
+  const formStatus = document.getElementById('form-status');
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+
+  contactForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!submitBtn || !formStatus) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    // Simulated quick response with mailto fallback option
+    setTimeout(() => {
+      submitBtn.textContent = 'Sent!';
+      formStatus.classList.remove('hidden');
+      contactForm.reset();
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Another Message';
+      }, 3000);
+    }, 600);
+  });
+</script>

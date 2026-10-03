@@ -1,0 +1,212 @@
+---
+---
+
+<section id="specs" class="border-b border-[var(--color-hairline)] bg-[var(--color-canvas)] py-16 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    
+    <!-- Section Heading -->
+    <div class="max-w-2xl">
+      <div class="flex items-center gap-2">
+        <span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-ink)]"></span>
+        <span class="font-mono text-xs font-medium uppercase tracking-wider text-[var(--color-mute)]">
+          Technical Reference
+        </span>
+      </div>
+      <h2 class="mt-2 font-sans text-2xl font-semibold tracking-[-1px] text-[var(--color-ink)] sm:text-3xl">
+        Technical Breakdown: Why Raw SVG Files Carry Up to 70% Bloat
+      </h2>
+      <p class="mt-2 text-sm text-[var(--color-body)]">
+        Vector graphics are XML documents composed of mathematical nodes, coordinates, and styling attributes. When exported from graphics software, massive amounts of internal editor state get packed into the file. Our <strong>online SVG optimizer</strong> strips this code without touching visual paths.
+      </p>
+    </div>
+
+    <!-- Optimization Breakdown Table -->
+    <div class="mt-10 overflow-hidden rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] shadow-2xs">
+      <div class="border-b border-[var(--color-hairline)] bg-[var(--color-canvas)] px-6 py-4">
+        <h3 class="font-sans text-sm font-semibold text-[var(--color-ink)]">
+          What Our SVG Cleaner &amp; Optimizer Minifies
+        </h3>
+        <p class="text-xs text-[var(--color-mute)]">
+          How each optimization step strips bloat and reduces file size without degrading vector fidelity.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="border-b border-[var(--color-hairline)] bg-[var(--color-hairline-soft)] font-mono text-[11px] text-[var(--color-body)]">
+            <tr>
+              <th class="py-3 px-6 font-semibold">Element / Attribute</th>
+              <th class="py-3 px-6 font-semibold">Source & Reason</th>
+              <th class="py-3 px-6 font-semibold">Cleaning Action</th>
+              <th class="py-3 px-6 font-semibold">Typical Size Reduction</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--color-hairline)] text-[var(--color-body)]">
+            <tr class="hover:bg-[var(--color-hairline-soft)]/50">
+              <td class="py-3.5 px-6 font-mono font-medium text-[var(--color-ink)]">
+                &lt;metadata&gt; &amp; RDF tags
+              </td>
+              <td class="py-3.5 px-6">
+                Inserted by Adobe Illustrator, Inkscape, or Figma containing author names, timestamps, and editing history.
+              </td>
+              <td class="py-3.5 px-6">
+                Completely stripped; never needed by web browsers or renderers.
+              </td>
+              <td class="py-3.5 px-6 font-mono text-emerald-600 font-semibold">
+                15% – 35%
+              </td>
+            </tr>
+            <tr class="hover:bg-neutral-50/50">
+              <td class="py-3.5 px-6 font-mono font-medium text-[var(--color-ink)]">
+                Decimal Coordinates (<code class="text-neutral-500">140.28491823</code>)
+              </td>
+              <td class="py-3.5 px-6">
+                Vector tools export path coordinates with 6 to 9 decimal places of precision.
+              </td>
+              <td class="py-3.5 px-6">
+                Rounds to 2 or 3 decimal places (sub-pixel accuracy with zero visible distortion).
+              </td>
+              <td class="py-3.5 px-6 font-mono text-emerald-600 font-semibold">
+                10% – 25%
+              </td>
+            </tr>
+            <tr class="hover:bg-neutral-50/50">
+              <td class="py-3.5 px-6 font-mono font-medium text-[var(--color-ink)]">
+                Empty &lt;g&gt; and &lt;defs&gt;
+              </td>
+              <td class="py-3.5 px-6">
+                Layer groups created during design exploration that contain zero visible elements or unused gradients.
+              </td>
+              <td class="py-3.5 px-6">
+                Collapsed or removed, reducing DOM nodes and speeding up browser parsing.
+              </td>
+              <td class="py-3.5 px-6 font-mono text-emerald-600 font-semibold">
+                5% – 15%
+              </td>
+            </tr>
+            <tr class="hover:bg-neutral-50/50">
+              <td class="py-3.5 px-6 font-mono font-medium text-[var(--color-ink)]">
+                Editor Namespaces (<code class="text-neutral-500">xmlns:inkscape</code>)
+              </td>
+              <td class="py-3.5 px-6">
+                Custom XML namespaces used by desktop editors to restore layer states.
+              </td>
+              <td class="py-3.5 px-6">
+                Stripped from the root SVG element; pure W3C SVG 1.1/2.0 output.
+              </td>
+              <td class="py-3.5 px-6 font-mono text-emerald-600 font-semibold">
+                3% – 8%
+              </td>
+            </tr>
+            <tr class="hover:bg-neutral-50/50">
+              <td class="py-3.5 px-6 font-mono font-medium text-[var(--color-ink)]">
+                Comments &amp; DOCTYPE
+              </td>
+              <td class="py-3.5 px-6">
+                <code class="text-neutral-500">&lt;!-- Generator: ... --&gt;</code> and DTD entity references.
+              </td>
+              <td class="py-3.5 px-6">
+                Stripped to save transfer bytes and avoid legacy doctype quirks.
+              </td>
+              <td class="py-3.5 px-6 font-mono text-emerald-600 font-semibold">
+                2% – 5%
+              </td>
+            </tr>
+            <tr class="hover:bg-neutral-50/50">
+              <td class="py-3.5 px-6 font-mono font-medium text-[var(--color-ink)]">
+                Hex Colors &amp; Inline CSS
+              </td>
+              <td class="py-3.5 px-6">
+                Verbose colors (<code class="text-neutral-500">#ffffff</code> to <code class="text-neutral-500">#fff</code>) and redundant style attributes.
+              </td>
+              <td class="py-3.5 px-6">
+                Converted to canonical short notation or presentation attributes for easier CSS theming.
+              </td>
+              <td class="py-3.5 px-6 font-mono text-emerald-600 font-semibold">
+                3% – 10%
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Feature Comparison: SVGCleanKit vs Competitor -->
+    <div class="mt-14">
+      <div class="max-w-2xl">
+        <h3 class="font-sans text-xl font-semibold tracking-[-0.6px] text-[var(--color-ink)]">
+          Online SVG Optimizer Comparison: SVGCleanKit vs Legacy Tools
+        </h3>
+        <p class="mt-1 text-xs text-[var(--color-body)]">
+          Direct comparison between SVGCleanKit and conventional web utilities like svgoptimizer.com.
+        </p>
+      </div>
+
+      <div class="mt-6 overflow-hidden rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] shadow-2xs">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="border-b border-[var(--color-hairline)] bg-[var(--color-hairline-soft)] font-mono text-[11px] text-[var(--color-body)]">
+              <tr>
+                <th class="py-3 px-6 font-semibold">Feature / Capability</th>
+                <th class="py-3 px-6 font-semibold text-[var(--color-ink)]">SVGCleanKit</th>
+                <th class="py-3 px-6 font-semibold text-[var(--color-mute)]">svgoptimizer.com</th>
+                <th class="py-3 px-6 font-semibold text-[var(--color-mute)]">Generic Online Tools</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--color-hairline)]">
+              <tr class="hover:bg-[var(--color-hairline-soft)]/50">
+                <td class="py-3 px-6 font-medium text-[var(--color-ink)]">Paste Raw SVG Code Directly</td>
+                <td class="py-3 px-6 text-emerald-700 font-semibold">✓ Supported (Instant Clean)</td>
+                <td class="py-3 px-6 text-neutral-400">✗ Not Supported (Files only)</td>
+                <td class="py-3 px-6 text-neutral-400">✗ Rare</td>
+              </tr>
+              <tr class="hover:bg-neutral-50/50">
+                <td class="py-3 px-6 font-medium text-[var(--color-ink)]">Interactive Split-Screen Slider</td>
+                <td class="py-3 px-6 text-emerald-700 font-semibold">✓ Draggable Divider & Touch</td>
+                <td class="py-3 px-6 text-neutral-500">Basic Canvas</td>
+                <td class="py-3 px-6 text-neutral-400">✗ Static or none</td>
+              </tr>
+              <tr class="hover:bg-neutral-50/50">
+                <td class="py-3 px-6 font-medium text-[var(--color-ink)]">Transparent Checkerboard Modes</td>
+                <td class="py-3 px-6 text-emerald-700 font-semibold">✓ Light, Dark, White, Night</td>
+                <td class="py-3 px-6 text-neutral-400">✗ Fixed single canvas</td>
+                <td class="py-3 px-6 text-neutral-400">✗ White background only</td>
+              </tr>
+              <tr class="hover:bg-neutral-50/50">
+                <td class="py-3 px-6 font-medium text-[var(--color-ink)]">Export to React / JSX Component</td>
+                <td class="py-3 px-6 text-emerald-700 font-semibold">✓ 1-Click CamelCase JSX</td>
+                <td class="py-3 px-6 text-neutral-400">✗ No</td>
+                <td class="py-3 px-6 text-neutral-400">✗ No</td>
+              </tr>
+              <tr class="hover:bg-neutral-50/50">
+                <td class="py-3 px-6 font-medium text-[var(--color-ink)]">Export as Data URI / CSS Background</td>
+                <td class="py-3 px-6 text-emerald-700 font-semibold">✓ 1-Click Encoded URI</td>
+                <td class="py-3 px-6 text-neutral-400">✗ No</td>
+                <td class="py-3 px-6 text-neutral-400">✗ No</td>
+              </tr>
+              <tr class="hover:bg-neutral-50/50">
+                <td class="py-3 px-6 font-medium text-[var(--color-ink)]">Granular Optimization Toggles</td>
+                <td class="py-3 px-6 text-emerald-700 font-semibold">✓ 11+ Granular Toggles & Presets</td>
+                <td class="py-3 px-6 text-neutral-500">Only 1 Precision Slider</td>
+                <td class="py-3 px-6 text-neutral-400">✗ Fixed black-box</td>
+              </tr>
+              <tr class="hover:bg-neutral-50/50">
+                <td class="py-3 px-6 font-medium text-[var(--color-ink)]">100% Client-Side Privacy</td>
+                <td class="py-3 px-6 text-emerald-700 font-semibold">✓ In-Browser (Zero Uploads)</td>
+                <td class="py-3 px-6 text-emerald-700">✓ In-Browser</td>
+                <td class="py-3 px-6 text-red-600">✗ Uploads to cloud server</td>
+              </tr>
+              <tr class="hover:bg-neutral-50/50">
+                <td class="py-3 px-6 font-medium text-[var(--color-ink)]">Ad-Free Developer Experience</td>
+                <td class="py-3 px-6 text-emerald-700 font-semibold">✓ 100% Ad-Free & Clean</td>
+                <td class="py-3 px-6 text-neutral-400">✗ Multiple Google Ad Banners</td>
+                <td class="py-3 px-6 text-neutral-400">✗ Heavy advertising</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

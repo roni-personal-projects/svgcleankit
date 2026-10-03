@@ -1,0 +1,241 @@
+---
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-[var(--color-hairline)] bg-[var(--color-canvas)]/90 backdrop-blur-md">
+  <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
+    
+    <!-- Brand / Logo -->
+    <a href="/" class="group flex items-center gap-2.5 transition-opacity hover:opacity-85">
+      <div class="flex h-8 w-8 items-center justify-center rounded-[6px] bg-[var(--color-ink)] text-[var(--color-canvas)] shadow-xs">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
+        </svg>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="font-sans text-base font-semibold tracking-tight text-[var(--color-ink)]">
+          SVG Clean Kit
+        </span>
+        <span class="hidden rounded-full border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-2 py-0.5 font-mono text-[10px] font-medium text-[var(--color-mute)] sm:inline-block">
+          v1.0 • Client-Side
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <nav class="hidden items-center gap-1 md:flex">
+      <a href="/#app" class="rounded-full px-3 py-1.5 text-xs font-medium text-[var(--color-body)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        Optimizer
+      </a>
+      <a href="/#features" class="rounded-full px-3 py-1.5 text-xs font-medium text-[var(--color-body)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        Features
+      </a>
+      <a href="/#guide" class="rounded-full px-3 py-1.5 text-xs font-medium text-[var(--color-body)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        Guide
+      </a>
+      <a href="/about" class="rounded-full px-3 py-1.5 text-xs font-medium text-[var(--color-body)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        About
+      </a>
+      <a href="/#faq" class="rounded-full px-3 py-1.5 text-xs font-medium text-[var(--color-body)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        FAQ
+      </a>
+      <a href="/contact" class="rounded-full px-3 py-1.5 text-xs font-medium text-[var(--color-body)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        Contact
+      </a>
+    </nav>
+
+    <!-- Right Actions & Theme Switcher -->
+    <div class="flex items-center gap-2 sm:gap-2.5">
+      
+      <!-- Theme Toggle Button (Light / Dark / System) -->
+      <div class="relative">
+        <button
+          id="theme-toggle-btn"
+          type="button"
+          aria-label="Toggle theme mode"
+          class="flex h-8 w-8 items-center justify-center rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] text-[var(--color-ink)] transition-colors hover:bg-[var(--color-hairline-soft)]"
+          title="Switch theme"
+        >
+          <!-- Sun Icon (for light mode) -->
+          <svg id="theme-icon-sun" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+          </svg>
+          <!-- Moon Icon (for dark mode) -->
+          <svg id="theme-icon-moon" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+          </svg>
+          <!-- System / Monitor Icon (for system mode) -->
+          <svg id="theme-icon-system" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0H3" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Zero Server Pill (Desktop only) -->
+      <span class="hidden items-center gap-1.5 rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-2.5 py-1 font-mono text-xs text-[var(--color-body)] lg:inline-flex">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        Zero Upload
+      </span>
+
+      <!-- Primary CTA -->
+      <a
+        href="/#app"
+        class="hidden sm:inline-flex h-8 items-center justify-center rounded-[6px] bg-[var(--color-ink)] px-3 text-xs font-medium text-[var(--color-canvas)] transition-all hover:opacity-90 active:scale-98"
+      >
+        Optimize SVG
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        aria-label="Open navigation menu"
+        class="flex h-8 w-8 items-center justify-center rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] text-[var(--color-ink)] md:hidden transition-colors hover:bg-[var(--color-hairline-soft)]"
+      >
+        <svg id="hamburger-icon" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <svg id="close-icon" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Mobile Dropdown Navigation Menu -->
+  <div id="mobile-menu" class="hidden border-b border-[var(--color-hairline)] bg-[var(--color-canvas)] px-4 py-4 md:hidden">
+    <nav class="flex flex-col gap-2">
+      <a href="/#app" class="mobile-nav-link rounded-[6px] px-3 py-2 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        Optimizer
+      </a>
+      <a href="/#features" class="mobile-nav-link rounded-[6px] px-3 py-2 text-sm font-medium text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        Features
+      </a>
+      <a href="/#guide" class="mobile-nav-link rounded-[6px] px-3 py-2 text-sm font-medium text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        Optimization Guide
+      </a>
+      <a href="/about" class="mobile-nav-link rounded-[6px] px-3 py-2 text-sm font-medium text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        About Us
+      </a>
+      <a href="/#faq" class="mobile-nav-link rounded-[6px] px-3 py-2 text-sm font-medium text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        FAQ
+      </a>
+      <a href="/contact" class="mobile-nav-link rounded-[6px] px-3 py-2 text-sm font-medium text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)]">
+        Contact Us
+      </a>
+      <div class="mt-2 border-t border-[var(--color-hairline)] pt-3 flex items-center justify-between">
+        <span class="text-xs text-[var(--color-mute)]">Theme</span>
+        <button
+          id="mobile-theme-cycle-btn"
+          type="button"
+          class="flex items-center gap-1.5 rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-2.5 py-1 text-xs font-medium text-[var(--color-ink)]"
+        >
+          <span id="mobile-theme-label">Theme: Auto</span>
+        </button>
+      </div>
+      <a
+        href="/#app"
+        class="mt-2 flex h-9 items-center justify-center rounded-[6px] bg-[var(--color-ink)] px-4 text-xs font-medium text-[var(--color-canvas)]"
+      >
+        Open Optimizer Tool
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Theme Toggle Controller (3-state: Light -> Dark -> System)
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const themeIconSun = document.getElementById('theme-icon-sun');
+  const themeIconMoon = document.getElementById('theme-icon-moon');
+  const themeIconSystem = document.getElementById('theme-icon-system');
+  const mobileThemeCycleBtn = document.getElementById('mobile-theme-cycle-btn');
+  const mobileThemeLabel = document.getElementById('mobile-theme-label');
+
+  function updateThemeUI() {
+    const stored = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Hide all icons first
+    themeIconSun?.classList.add('hidden');
+    themeIconMoon?.classList.add('hidden');
+    themeIconSystem?.classList.add('hidden');
+
+    if (stored === 'dark') {
+      document.documentElement.classList.add('dark');
+      themeIconMoon?.classList.remove('hidden');
+      if (themeToggleBtn) themeToggleBtn.title = 'Theme: Dark (Click for System)';
+      if (mobileThemeLabel) mobileThemeLabel.textContent = 'Theme: Dark';
+    } else if (stored === 'light') {
+      document.documentElement.classList.remove('dark');
+      themeIconSun?.classList.remove('hidden');
+      if (themeToggleBtn) themeToggleBtn.title = 'Theme: Light (Click for Dark)';
+      if (mobileThemeLabel) mobileThemeLabel.textContent = 'Theme: Light';
+    } else {
+      // System mode
+      if (systemDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      themeIconSystem?.classList.remove('hidden');
+      if (themeToggleBtn) themeToggleBtn.title = `Theme: System (${systemDark ? 'Dark' : 'Light'}) (Click for Light)`;
+      if (mobileThemeLabel) mobileThemeLabel.textContent = `Theme: System (${systemDark ? 'Dark' : 'Light'})`;
+    }
+  }
+
+  function cycleTheme() {
+    const stored = localStorage.getItem('theme');
+    if (!stored) {
+      // From System -> Light
+      localStorage.setItem('theme', 'light');
+    } else if (stored === 'light') {
+      // From Light -> Dark
+      localStorage.setItem('theme', 'dark');
+    } else {
+      // From Dark -> System (remove preference)
+      localStorage.removeItem('theme');
+    }
+    updateThemeUI();
+  }
+
+  themeToggleBtn?.addEventListener('click', cycleTheme);
+  mobileThemeCycleBtn?.addEventListener('click', cycleTheme);
+
+  // System preference listener
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (!localStorage.getItem('theme')) {
+      updateThemeUI();
+    }
+  });
+
+  updateThemeUI();
+
+  // Mobile Menu Controller
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    const isHidden = mobileMenu?.classList.contains('hidden');
+    if (isHidden) {
+      mobileMenu?.classList.remove('hidden');
+      hamburgerIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+    } else {
+      mobileMenu?.classList.add('hidden');
+      hamburgerIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    }
+  });
+
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      hamburgerIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    });
+  });
+</script>

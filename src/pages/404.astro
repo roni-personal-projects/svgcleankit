@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="404 - Page Not Found | SVG Clean Kit"
+  description="The page you are looking for does not exist on SVG Clean Kit."
+>
+  <Header />
+
+  <main class="min-h-[calc(100vh-14rem)] flex items-center justify-center py-16 sm:py-24 bg-[var(--color-canvas)]">
+    <div class="mx-auto max-w-lg px-4 sm:px-6 text-center">
+      
+      <!-- Graphic / Badge -->
+      <div class="inline-flex items-center gap-2 rounded-full border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-3 py-1 text-xs font-mono text-[var(--color-mute)] mb-6">
+        <span class="h-2 w-2 rounded-full bg-rose-500"></span>
+        HTTP 404 • Not Found
+      </div>
+
+      <!-- Icon Graphic -->
+      <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] shadow-xs">
+        <svg class="h-8 w-8 text-[var(--color-ink)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
+        </svg>
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="font-sans text-4xl font-semibold tracking-[-2px] text-[var(--color-ink)] sm:text-5xl">
+        Vector Path Not Found
+      </h1>
+
+      <p class="mt-4 text-sm leading-relaxed text-[var(--color-body)]">
+        The page or resource you are looking for doesn't exist, has been moved, or the URL might have a typo.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href="/"
+          class="inline-flex h-9 w-full sm:w-auto items-center justify-center rounded-[6px] bg-[var(--color-ink)] px-5 text-xs font-semibold text-[var(--color-canvas)] transition-all hover:opacity-90 active:scale-98"
+        >
+          &larr; Return to Optimizer
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex h-9 w-full sm:w-auto items-center justify-center rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-5 text-xs font-medium text-[var(--color-ink)] transition-colors hover:bg-[var(--color-hairline-soft)]"
+        >
+          Contact Support
+        </a>
+      </div>
+
+      <!-- Quick Helpful Links -->
+      <div class="mt-12 border-t border-[var(--color-hairline)] pt-6">
+        <p class="font-mono text-xs uppercase tracking-wider text-[var(--color-mute)] mb-3">
+          Popular Destinations
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 text-xs font-medium text-[var(--color-body)]">
+          <a href="/#app" class="hover:text-[var(--color-ink)] transition-colors">SVG Optimizer</a>
+          <a href="/#features" class="hover:text-[var(--color-ink)] transition-colors">Features</a>
+          <a href="/about" class="hover:text-[var(--color-ink)] transition-colors">About Us</a>
+          <a href="/privacy" class="hover:text-[var(--color-ink)] transition-colors">Privacy Policy</a>
+          <a href="/terms" class="hover:text-[var(--color-ink)] transition-colors">Terms of Service</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

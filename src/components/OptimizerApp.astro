@@ -1,0 +1,1439 @@
+---
+---
+
+<section id="app" class="relative scroll-mt-20 border-b border-[var(--color-hairline)] bg-[var(--color-canvas)] py-10 sm:py-14">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    
+    <!-- Top Section Header -->
+    <div class="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="inline-block h-2 w-2 rounded-full bg-emerald-500"></span>
+          <span class="font-mono text-xs font-medium uppercase tracking-wider text-[var(--color-mute)]">
+            Interactive Workspace
+          </span>
+        </div>
+        <h2 class="mt-1 font-sans text-2xl font-semibold tracking-[-0.8px] text-[var(--color-ink)] sm:text-3xl">
+          Clean & Optimize Your SVGs
+        </h2>
+      </div>
+
+      <!-- Input Mode Switcher (Upload vs Paste vs Samples) -->
+      <div class="inline-flex w-full sm:w-auto justify-center rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-1 shadow-2xs">
+        <button
+          id="mode-upload-tab"
+          type="button"
+          class="flex items-center justify-center gap-1.5 rounded-[4px] bg-[var(--color-primary)] px-3 py-1.5 text-xs font-medium text-[var(--color-on-primary)] transition-all flex-1 sm:flex-initial"
+        >
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 16.5v-2.25m-18 0V7.5A2.25 2.25 0 0 1 5.25 5.25h13.5A2.25 2.25 0 0 1 21 7.5v9m-9-12v12m0-12 3.75 3.75M12 3.75 8.25 7.5" />
+          </svg>
+          <span class="truncate">Upload</span>
+        </button>
+        <button
+          id="mode-paste-tab"
+          type="button"
+          class="flex items-center justify-center gap-1.5 rounded-[4px] px-3 py-1.5 text-xs font-medium text-[var(--color-body)] transition-all hover:text-[var(--color-ink)] flex-1 sm:flex-initial"
+        >
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+          </svg>
+          <span class="truncate">Paste Code</span>
+        </button>
+        <button
+          id="mode-sample-tab"
+          type="button"
+          class="flex items-center justify-center gap-1.5 rounded-[4px] px-3 py-1.5 text-xs font-medium text-[var(--color-body)] transition-all hover:text-[var(--color-ink)] flex-1 sm:flex-initial"
+        >
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+          </svg>
+          <span class="truncate">Samples</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PANEL 1: Upload Dropzone Panel -->
+    <div id="upload-panel" class="mb-6 block">
+      <div
+        id="drop-zone"
+        class="group relative flex cursor-pointer flex-col items-center justify-center rounded-[12px] border-2 border-dashed border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-6 sm:p-8 text-center transition-all hover:border-[var(--color-link)] hover:bg-[var(--color-canvas)]"
+      >
+        <input
+          id="file-input"
+          type="file"
+          accept=".svg,.svgz,image/svg+xml"
+          multiple
+          class="absolute inset-0 cursor-pointer opacity-0"
+        />
+        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-hairline-soft)] text-[var(--color-ink)] transition-transform group-hover:scale-105">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
+          </svg>
+        </div>
+        <p class="mt-3 text-sm font-semibold text-[var(--color-ink)]">
+          Drag & drop your SVG files here, or <span class="text-[var(--color-link)] underline underline-offset-2">browse files</span>
+        </p>
+        <p class="mt-1 text-xs text-[var(--color-mute)]">
+          Supports multiple SVGs up to 50MB. Processing is 100% in-browser.
+        </p>
+      </div>
+    </div>
+
+    <!-- PANEL 2: Paste SVG Code Panel (Hidden initially) -->
+    <div id="paste-panel" class="mb-6 hidden">
+      <div class="rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-4">
+        <label for="paste-input" class="mb-2 block font-mono text-xs font-medium text-[var(--color-body)]">
+          Paste Raw SVG Markup (<code class="text-[var(--color-ink)]">&lt;svg ...&gt;...&lt;/svg&gt;</code>)
+        </label>
+        <textarea
+          id="paste-input"
+          rows="6"
+          placeholder='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">...</svg>'
+          class="w-full resize-y rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3 font-mono text-xs text-[var(--color-ink)] outline-hidden transition-all focus:border-[var(--color-link)] focus:bg-[var(--color-canvas-elevated)]"
+        ></textarea>
+        <div class="mt-3 flex items-center justify-between">
+          <span id="paste-error" class="hidden text-xs text-[var(--color-error)]">Invalid SVG string. Please check the code.</span>
+          <div class="ml-auto flex gap-2">
+            <button
+              id="clear-paste-btn"
+              type="button"
+              class="rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-3 py-1.5 text-xs font-medium text-[var(--color-body)] hover:bg-[var(--color-hairline-soft)] hover:text-[var(--color-ink)]"
+            >
+              Clear
+            </button>
+            <button
+              id="apply-paste-btn"
+              type="button"
+              class="rounded-[6px] bg-[var(--color-primary)] px-4 py-1.5 text-xs font-medium text-[var(--color-on-primary)] transition-opacity hover:opacity-90"
+            >
+              Optimize Pasted Code
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: Sample SVGs Panel (Hidden initially) -->
+    <div id="sample-panel" class="mb-6 hidden">
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <button
+          type="button"
+          data-sample="figma-badge"
+          class="sample-btn group flex flex-col items-start rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-4 text-left transition-all hover:border-[var(--color-link)] hover:shadow-2xs"
+        >
+          <div class="flex w-full items-center justify-between">
+            <span class="font-sans text-xs font-semibold text-[var(--color-ink)]">Figma Export Badge</span>
+            <span class="rounded-full bg-purple-500/10 px-2 py-0.5 font-mono text-[10px] font-medium text-purple-600 dark:text-purple-400">~60% Bloat</span>
+          </div>
+          <p class="mt-1 text-[11px] leading-relaxed text-[var(--color-body)]">
+            Contains empty groups, Illustrator metadata, unneeded xmlns, and long floats.
+          </p>
+          <span class="mt-3 text-[11px] font-medium text-[var(--color-link)] group-hover:underline">Load Sample &rarr;</span>
+        </button>
+
+        <button
+          type="button"
+          data-sample="analytics-chart"
+          class="sample-btn group flex flex-col items-start rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-4 text-left transition-all hover:border-[var(--color-link)] hover:shadow-2xs"
+        >
+          <div class="flex w-full items-center justify-between">
+            <span class="font-sans text-xs font-semibold text-[var(--color-ink)]">Analytics Chart</span>
+            <span class="rounded-full bg-blue-500/10 px-2 py-0.5 font-mono text-[10px] font-medium text-blue-600 dark:text-blue-400">Excess Decimals</span>
+          </div>
+          <p class="mt-1 text-[11px] leading-relaxed text-[var(--color-body)]">
+            Heavy gradient and line chart with redundant 6-digit float precision.
+          </p>
+          <span class="mt-3 text-[11px] font-medium text-[var(--color-link)] group-hover:underline">Load Sample &rarr;</span>
+        </button>
+
+        <button
+          type="button"
+          data-sample="clean-feather-icon"
+          class="sample-btn group flex flex-col items-start rounded-[12px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] p-4 text-left transition-all hover:border-[var(--color-link)] hover:shadow-2xs"
+        >
+          <div class="flex w-full items-center justify-between">
+            <span class="font-sans text-xs font-semibold text-[var(--color-ink)]">Lucide / Feather Icon</span>
+            <span class="rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-400">Icon Clean</span>
+          </div>
+          <p class="mt-1 text-[11px] leading-relaxed text-[var(--color-body)]">
+            Minimalist vector icon. See precision rounding and xmlns cleanup.
+          </p>
+          <span class="mt-3 text-[11px] font-medium text-[var(--color-link)] group-hover:underline">Load Sample &rarr;</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- BATCH QUEUE CAROUSEL / FILE STRIP -->
+    <div id="queue-container" class="mb-6 hidden">
+      <div class="flex items-center justify-between border-b border-[var(--color-hairline)] pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="font-sans text-xs font-semibold text-[var(--color-ink)]">
+            Batch Queue (<span id="queue-count">0</span>)
+          </span>
+          <span id="queue-savings-summary" class="rounded-full bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
+            Total Saved: 0 KB (-0%)
+          </span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            id="clear-all-btn"
+            type="button"
+            class="rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-2.5 py-1 text-xs font-medium text-[var(--color-body)] hover:bg-[var(--color-hairline-soft)] hover:text-[var(--color-ink)]"
+          >
+            Clear All
+          </button>
+          <button
+            id="download-all-zip-btn"
+            type="button"
+            class="flex items-center gap-1.5 rounded-[6px] bg-[var(--color-primary)] px-3 py-1 text-xs font-medium text-[var(--color-on-primary)] transition-opacity hover:opacity-90"
+          >
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 16.5v-2.25m-9-6.75v9m0 0 3.75-3.75M12 18.75 8.25 15M12 3v9" />
+            </svg>
+            Save All as ZIP
+          </button>
+        </div>
+      </div>
+
+      <!-- File item bubbles/cards list -->
+      <div id="queue-list" class="mt-3 flex gap-2.5 overflow-x-auto pb-2 scrollbar-thin">
+        <!-- Rendered dynamically by script -->
+      </div>
+    </div>
+
+    <!-- MAIN INTERACTIVE STUDIO (ACTIVE FILE VIEW) -->
+    <div id="studio-container" class="rounded-[16px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] shadow-xs">
+      
+      <!-- Studio Header Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-hairline)] px-4 py-3 sm:px-6">
+        <div class="flex items-center gap-3">
+          <div class="flex h-8 w-8 items-center justify-center rounded-[6px] bg-[var(--color-canvas)] text-[var(--color-ink)] border border-[var(--color-hairline)]">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 id="active-filename" class="font-sans text-sm font-semibold text-[var(--color-ink)] truncate max-w-[200px] sm:max-w-xs">
+                illustration.svg
+              </h3>
+              <span id="optimizing-spinner" class="hidden items-center gap-1 font-mono text-[10px] text-[var(--color-mute)]">
+                <svg class="h-3 w-3 animate-spin text-[var(--color-link)]" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Optimizing...
+              </span>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-[var(--color-mute)]">
+              <span>Before: <strong id="stat-before-size" class="text-[var(--color-body)]">0 KB</strong></span>
+              <span>&rarr;</span>
+              <span>After: <strong id="stat-after-size" class="text-[var(--color-ink)]">0 KB</strong></span>
+              <span id="stat-savings-badge" class="rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
+                -0% (0 KB saved)
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- View Mode Toolbar -->
+        <div class="flex flex-wrap items-center gap-2">
+          
+          <!-- Zoom Controls -->
+          <div class="inline-flex items-center rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-0.5">
+            <button
+              id="zoom-out-btn"
+              type="button"
+              class="px-2 py-1 text-xs font-mono font-medium text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)] rounded-[4px] transition-all"
+              title="Zoom Out"
+            >
+              -
+            </button>
+            <button
+              id="zoom-reset-btn"
+              type="button"
+              class="px-2 py-1 text-[11px] font-mono font-medium text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)] rounded-[4px] transition-all"
+              title="Reset Zoom / Fit"
+            >
+              <span id="zoom-level-label">100%</span>
+            </button>
+            <button
+              id="zoom-in-btn"
+              type="button"
+              class="px-2 py-1 text-xs font-mono font-medium text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-hairline-soft)] rounded-[4px] transition-all"
+              title="Zoom In"
+            >
+              +
+            </button>
+          </div>
+
+          <!-- View switcher -->
+          <div class="inline-flex rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-0.5">
+            <button
+              id="view-side-btn"
+              type="button"
+              class="rounded-[4px] bg-[var(--color-canvas-elevated)] px-2.5 py-1 text-xs font-medium text-[var(--color-ink)] shadow-2xs transition-all"
+              title="Side-by-Side Dual View"
+            >
+              Side-by-Side
+            </button>
+            <button
+              id="view-split-btn"
+              type="button"
+              class="rounded-[4px] px-2.5 py-1 text-xs font-medium text-[var(--color-body)] transition-all hover:text-[var(--color-ink)]"
+              title="Split Comparison Slider"
+            >
+              Split Slider
+            </button>
+            <button
+              id="view-code-btn"
+              type="button"
+              class="rounded-[4px] px-2.5 py-1 text-xs font-medium text-[var(--color-body)] transition-all hover:text-[var(--color-ink)]"
+              title="SVG Code Diff"
+            >
+              Code Diff
+            </button>
+          </div>
+
+          <!-- Canvas Backdrop Picker -->
+          <div class="inline-flex items-center gap-1 rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-1.5 py-1">
+            <span class="text-[10px] font-mono text-[var(--color-mute)] mr-0.5">BG:</span>
+            <button id="bg-checker-light" type="button" class="h-4 w-4 rounded-xs border border-neutral-300 bg-checkerboard-light ring-1 ring-[var(--color-ink)]" title="Light Checkerboard"></button>
+            <button id="bg-checker-dark" type="button" class="h-4 w-4 rounded-xs border border-neutral-700 bg-checkerboard-dark" title="Dark Checkerboard"></button>
+            <button id="bg-white" type="button" class="h-4 w-4 rounded-xs border border-neutral-200 bg-white" title="Pure White"></button>
+            <button id="bg-black" type="button" class="h-4 w-4 rounded-xs border border-neutral-800 bg-neutral-900" title="Dark Canvas"></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Studio Body (Main Canvas + Settings Sidebar Grid) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-[var(--color-hairline)]">
+        
+        <!-- Left / Center: Interactive SVG Visual Canvas or Code View (8 cols) -->
+        <div class="lg:col-span-8 flex flex-col min-w-0">
+          
+          <!-- VISUAL MODE 1: Side-by-Side View (Default view) -->
+          <div id="canvas-side-container" class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[var(--color-hairline)] min-h-[380px] sm:min-h-[460px] w-full">
+            
+            <!-- Left Card: Before (Original) -->
+            <div class="flex flex-col h-full min-w-0 bg-[var(--color-canvas-elevated)]">
+              <div class="flex items-center justify-between border-b border-[var(--color-hairline)] bg-[var(--color-canvas)] px-3.5 py-2 text-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="rounded-[4px] bg-[var(--color-hairline-soft)] px-1.5 py-0.5 font-mono text-[10px] font-semibold text-[var(--color-ink)]">BEFORE</span>
+                  <span class="font-medium text-[var(--color-ink)]">Original</span>
+                </div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-[var(--color-mute)]">
+                  <span id="side-orig-dims" class="hidden sm:inline"></span>
+                  <strong id="side-orig-size" class="text-[var(--color-body)]">0 KB</strong>
+                </div>
+              </div>
+              <div id="side-orig-preview-box" class="relative flex-1 flex items-center justify-center p-6 bg-checkerboard-light overflow-hidden min-h-[320px]">
+                <div id="side-orig-stage" class="svg-preview-stage w-full h-full max-w-[85%] max-h-[85%] flex items-center justify-center transition-transform duration-150">
+                  <div id="side-original-svg" class="w-full h-full flex items-center justify-center"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Card: After (Optimized) -->
+            <div class="flex flex-col h-full min-w-0 bg-[var(--color-canvas-elevated)]">
+              <div class="flex items-center justify-between border-b border-[var(--color-hairline)] bg-[var(--color-canvas)] px-3.5 py-2 text-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="rounded-[4px] bg-emerald-500/15 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">AFTER</span>
+                  <span class="font-medium text-emerald-600 dark:text-emerald-400">Cleaned & Minified</span>
+                </div>
+                <div class="flex items-center gap-2 font-mono text-[11px]">
+                  <strong id="side-opt-size" class="text-[var(--color-ink)]">0 KB</strong>
+                  <span id="side-opt-savings" class="rounded-full bg-emerald-500/10 px-2 py-0.5 font-semibold text-emerald-600 dark:text-emerald-400">-0%</span>
+                </div>
+              </div>
+              <div id="side-opt-preview-box" class="relative flex-1 flex items-center justify-center p-6 bg-checkerboard-light overflow-hidden min-h-[320px]">
+                <div id="side-opt-stage" class="svg-preview-stage w-full h-full max-w-[85%] max-h-[85%] flex items-center justify-center transition-transform duration-150">
+                  <div id="side-optimized-svg" class="w-full h-full flex items-center justify-center"></div>
+                </div>
+                <button
+                  id="side-quick-copy-btn"
+                  type="button"
+                  class="absolute bottom-3 right-3 rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)]/95 px-2.5 py-1 text-[11px] font-mono font-medium text-[var(--color-ink)] shadow-2xs hover:bg-[var(--color-hairline-soft)] transition-all backdrop-blur-xs"
+                  title="Copy Clean SVG Markup"
+                >
+                  Copy Clean SVG
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- VISUAL MODE 2: Split Slider View (Fixed & enhanced) -->
+          <div id="canvas-split-container" class="hidden relative h-[380px] sm:h-[460px] w-full select-none items-center justify-center overflow-hidden bg-checkerboard-light p-4">
+            
+            <!-- Quick position presets on top bar inside split view -->
+            <div class="pointer-events-auto absolute top-3 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-1 rounded-full border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)]/90 px-2 py-0.5 text-[11px] font-mono shadow-xs backdrop-blur-xs">
+              <span class="text-[var(--color-mute)] mr-1">Split:</span>
+              <button id="split-pos-25" type="button" class="px-1.5 py-0.5 rounded-full hover:bg-[var(--color-hairline-soft)] text-[var(--color-body)]">25%</button>
+              <button id="split-pos-50" type="button" class="px-1.5 py-0.5 rounded-full bg-[var(--color-primary)] text-[var(--color-on-primary)] font-semibold">50%</button>
+              <button id="split-pos-75" type="button" class="px-1.5 py-0.5 rounded-full hover:bg-[var(--color-hairline-soft)] text-[var(--color-body)]">75%</button>
+            </div>
+
+            <!-- Shared stage centered inside split container -->
+            <div id="split-stage" class="relative flex items-center justify-center w-full h-full max-w-[85%] max-h-[85%] select-none transition-transform duration-150">
+              
+              <!-- Bottom Layer: Cleaned SVG (Always full underneath) -->
+              <div id="split-optimized-layer" class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+                <div id="split-optimized-svg" class="svg-preview-stage w-full h-full flex items-center justify-center">
+                  <!-- Injected Cleaned SVG with scoped IDs -->
+                </div>
+              </div>
+
+              <!-- Top Layer: Original SVG (Clipped from 0 to split percentage) -->
+              <div id="split-original-layer" class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
+                <div id="split-original-svg" class="svg-preview-stage w-full h-full flex items-center justify-center">
+                  <!-- Injected Original SVG with scoped IDs -->
+                </div>
+              </div>
+
+              <!-- Draggable Split Divider Line & Handle -->
+              <div
+                id="split-handle"
+                class="absolute top-0 bottom-0 z-20 w-0.5 cursor-ew-resize bg-[var(--color-ink)] shadow-md"
+                style="left: 50%;"
+              >
+                <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] shadow-md text-[var(--color-ink)] transition-transform hover:scale-110 active:scale-95 cursor-grab">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" transform="matrix(-1 0 0 1 20 0)" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 4.5 7.5 7.5-7.5 7.5" transform="matrix(1 0 0 1 -7.5 0)" />
+                  </svg>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Labels on Canvas -->
+            <div class="pointer-events-none absolute bottom-3 left-3 z-10 rounded-[4px] bg-black/70 px-2 py-1 font-mono text-[10px] text-white backdrop-blur-xs">
+              ◀ Original: <span id="label-orig-size">0 KB</span>
+            </div>
+            <div class="pointer-events-none absolute bottom-3 right-3 z-10 rounded-[4px] bg-black/70 px-2 py-1 font-mono text-[10px] text-white backdrop-blur-xs">
+              Optimized: <span id="label-opt-size">0 KB</span> ▶
+            </div>
+          </div>
+
+          <!-- VISUAL MODE 3: Code Diff View (Hidden initially) -->
+          <div id="canvas-code-container" class="hidden h-[380px] sm:h-[460px] w-full flex-col bg-[var(--color-canvas-elevated)]">
+            <div class="flex items-center justify-between border-b border-[var(--color-hairline)] bg-[var(--color-canvas)] px-4 py-2">
+              <span class="font-mono text-xs font-medium text-[var(--color-body)]">Markup Comparison</span>
+              <div class="flex gap-2 text-xs">
+                <span class="text-[var(--color-mute)]">Original: <span id="code-orig-chars">0</span> chars</span>
+                <span class="text-emerald-600 dark:text-emerald-400 font-medium">Cleaned: <span id="code-opt-chars">0</span> chars</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 flex-1 divide-y md:divide-y-0 md:divide-x divide-[var(--color-hairline)] overflow-hidden">
+              <div class="flex flex-col overflow-hidden">
+                <div class="border-b border-[var(--color-hairline)] bg-[var(--color-hairline-soft)] px-3 py-1 font-mono text-[10px] text-[var(--color-mute)]">ORIGINAL CODE</div>
+                <textarea id="code-orig-text" readonly class="flex-1 w-full resize-none p-3 font-mono text-[11px] leading-relaxed text-[var(--color-body)] outline-hidden bg-transparent overflow-auto"></textarea>
+              </div>
+              <div class="flex flex-col overflow-hidden bg-[var(--color-hairline-soft)]/20">
+                <div class="border-b border-[var(--color-hairline)] bg-[var(--color-hairline-soft)] px-3 py-1 font-mono text-[10px] text-emerald-600 dark:text-emerald-400">CLEANED CODE (MINIFIED)</div>
+                <textarea id="code-opt-text" readonly class="flex-1 w-full resize-none p-3 font-mono text-[11px] leading-relaxed text-[var(--color-ink)] outline-hidden bg-transparent overflow-auto"></textarea>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Optimization Settings Sidebar (4 cols) -->
+        <div class="lg:col-span-4 flex flex-col justify-between bg-[var(--color-canvas-elevated)] p-4 sm:p-5">
+          
+          <div class="space-y-4">
+            
+            <!-- Preset Selector -->
+            <div>
+              <label class="mb-1.5 block font-sans text-xs font-semibold text-[var(--color-ink)]">
+                Optimization Profile
+              </label>
+              <div class="grid grid-cols-2 gap-1.5">
+                <button
+                  type="button"
+                  data-preset="recommended"
+                  class="preset-btn rounded-[6px] border border-[var(--color-ink)] bg-[var(--color-primary)] px-2.5 py-1.5 text-center text-xs font-medium text-[var(--color-on-primary)] shadow-2xs transition-all"
+                >
+                  Recommended
+                </button>
+                <button
+                  type="button"
+                  data-preset="aggressive"
+                  class="preset-btn rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-2.5 py-1.5 text-center text-xs font-medium text-[var(--color-body)] transition-all hover:bg-[var(--color-hairline-soft)] hover:text-[var(--color-ink)]"
+                >
+                  Max Compression
+                </button>
+                <button
+                  type="button"
+                  data-preset="reactReady"
+                  class="preset-btn rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-2.5 py-1.5 text-center text-xs font-medium text-[var(--color-body)] transition-all hover:bg-[var(--color-hairline-soft)] hover:text-[var(--color-ink)]"
+                >
+                  React / JSX Clean
+                </button>
+                <button
+                  type="button"
+                  data-preset="safe"
+                  class="preset-btn rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-2.5 py-1.5 text-center text-xs font-medium text-[var(--color-body)] transition-all hover:bg-[var(--color-hairline-soft)] hover:text-[var(--color-ink)]"
+                >
+                  Conservative
+                </button>
+              </div>
+            </div>
+
+            <!-- Coordinate Precision Slider -->
+            <div class="rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3">
+              <div class="flex items-center justify-between">
+                <label for="precision-slider" class="font-sans text-xs font-semibold text-[var(--color-ink)]">
+                  Decimal Precision
+                </label>
+                <span id="precision-value" class="font-mono text-xs font-semibold text-[var(--color-link)]">
+                  3 decimals
+                </span>
+              </div>
+              <input
+                id="precision-slider"
+                type="range"
+                min="0"
+                max="5"
+                step="1"
+                value="3"
+                class="mt-2.5 w-full accent-[var(--color-primary)] cursor-pointer"
+              />
+              <div class="mt-1 flex justify-between font-mono text-[10px] text-[var(--color-mute)]">
+                <span>0 (Smallest)</span>
+                <span>3 (Default)</span>
+                <span>5 (Fine)</span>
+              </div>
+            </div>
+
+            <!-- Granular Toggles Accordion / List -->
+            <div>
+              <div class="mb-2 flex items-center justify-between">
+                <span class="font-sans text-xs font-semibold text-[var(--color-ink)]">
+                  Tuning Toggles
+                </span>
+                <button id="toggle-all-btn" type="button" class="text-[11px] font-medium text-[var(--color-link)] hover:underline">
+                  Reset Defaults
+                </button>
+              </div>
+
+              <div class="space-y-1.5 max-h-[175px] overflow-y-auto pr-1 scrollbar-thin text-xs text-[var(--color-body)]">
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Strip Metadata & DOCTYPE</span>
+                  <input type="checkbox" id="opt-metadata" checked class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Strip Editor & Generator Tags</span>
+                  <input type="checkbox" id="opt-editor" checked class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Remove Comments</span>
+                  <input type="checkbox" id="opt-comments" checked class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Collapse Empty Groups & Tags</span>
+                  <input type="checkbox" id="opt-empty-tags" checked class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Remove Hidden Elements</span>
+                  <input type="checkbox" id="opt-hidden" checked class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Clean Redundant Attributes</span>
+                  <input type="checkbox" id="opt-cleanup-attrs" checked class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Optimize Colors (Hex Minify)</span>
+                  <input type="checkbox" id="opt-colors" checked class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Convert Styles to Attributes</span>
+                  <input type="checkbox" id="opt-styles" checked class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Strip Unused XML Namespaces</span>
+                  <input type="checkbox" id="opt-namespaces" checked class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Strip ID Attributes</span>
+                  <input type="checkbox" id="opt-ids" class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+                <label class="flex items-center justify-between rounded-[4px] p-1.5 hover:bg-[var(--color-hairline-soft)] cursor-pointer">
+                  <span>Multipass Optimization</span>
+                  <input type="checkbox" id="opt-multipass" checked class="accent-[var(--color-primary)] rounded-[3px]" />
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Action Buttons in Sidebar -->
+          <div class="mt-4 pt-3 border-t border-[var(--color-hairline)] space-y-2">
+            <button
+              id="download-single-btn"
+              type="button"
+              class="w-full flex items-center justify-center gap-2 rounded-[6px] bg-[var(--color-primary)] py-2 text-xs font-medium text-[var(--color-on-primary)] shadow-xs transition-opacity hover:opacity-90 active:scale-98"
+            >
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 16.5v-2.25m-9-6.75v9m0 0 3.75-3.75M12 18.75 8.25 15M12 3v9" />
+              </svg>
+              Download Clean SVG
+            </button>
+
+            <!-- Developer Copy Export Options Grid -->
+            <div class="grid grid-cols-3 gap-1.5">
+              <button
+                id="copy-svg-btn"
+                type="button"
+                class="rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] py-1.5 text-center font-mono text-[11px] font-medium text-[var(--color-body)] hover:bg-[var(--color-hairline-soft)] hover:text-[var(--color-ink)]"
+                title="Copy Clean SVG Markup"
+              >
+                Copy SVG
+              </button>
+              <button
+                id="copy-jsx-btn"
+                type="button"
+                class="rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] py-1.5 text-center font-mono text-[11px] font-medium text-[var(--color-body)] hover:bg-[var(--color-hairline-soft)] hover:text-[var(--color-ink)]"
+                title="Copy as React / JSX Icon Component"
+              >
+                Copy JSX
+              </button>
+              <button
+                id="copy-datauri-btn"
+                type="button"
+                class="rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] py-1.5 text-center font-mono text-[11px] font-medium text-[var(--color-body)] hover:bg-[var(--color-hairline-soft)] hover:text-[var(--color-ink)]"
+                title="Copy as Data URI"
+              >
+                Data URI
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Notification Toast -->
+  <div
+    id="toast"
+    class="pointer-events-none fixed bottom-6 right-6 z-50 flex translate-y-10 items-center gap-2 rounded-[8px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-4 py-2.5 text-xs font-medium text-[var(--color-ink)] opacity-0 shadow-lg transition-all duration-300"
+  >
+    <svg class="h-4 w-4 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+    </svg>
+    <span id="toast-message">Copied to clipboard</span>
+  </div>
+</section>
+
+<script>
+  import {
+    optimizeSvgString,
+    DEFAULT_OPTIONS,
+    PRESETS,
+    formatBytes,
+    convertToJsx,
+    convertToDataUri,
+    createZipBundle,
+    type OptimizationOptions,
+    type OptimizationResult,
+  } from '../lib/optimizer';
+  import { SAMPLE_SVGS } from '../lib/samples';
+
+  interface QueuedItem {
+    id: string;
+    name: string;
+    originalSvg: string;
+    result?: OptimizationResult;
+    error?: string;
+  }
+
+  // App State
+  let queue: QueuedItem[] = [];
+  let activeIndex = 0;
+  let activeOptions: OptimizationOptions = { ...DEFAULT_OPTIONS };
+  let currentViewMode: 'side' | 'split' | 'code' = 'side';
+  let isDraggingSplit = false;
+  let currentZoom = 1;
+  let currentSplitPct = 50;
+
+  // DOM Elements
+  const uploadPanel = document.getElementById('upload-panel')!;
+  const pastePanel = document.getElementById('paste-panel')!;
+  const samplePanel = document.getElementById('sample-panel')!;
+  const modeUploadTab = document.getElementById('mode-upload-tab')!;
+  const modePasteTab = document.getElementById('mode-paste-tab')!;
+  const modeSampleTab = document.getElementById('mode-sample-tab')!;
+
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const dropZone = document.getElementById('drop-zone')!;
+  const pasteInput = document.getElementById('paste-input') as HTMLTextAreaElement;
+  const applyPasteBtn = document.getElementById('apply-paste-btn')!;
+  const clearPasteBtn = document.getElementById('clear-paste-btn')!;
+  const pasteError = document.getElementById('paste-error')!;
+
+  const queueContainer = document.getElementById('queue-container')!;
+  const queueList = document.getElementById('queue-list')!;
+  const queueCount = document.getElementById('queue-count')!;
+  const queueSavingsSummary = document.getElementById('queue-savings-summary')!;
+  const clearAllBtn = document.getElementById('clear-all-btn')!;
+  const downloadAllZipBtn = document.getElementById('download-all-zip-btn')!;
+
+  const studioContainer = document.getElementById('studio-container')!;
+  const activeFilenameEl = document.getElementById('active-filename')!;
+  const statBeforeSize = document.getElementById('stat-before-size')!;
+  const statAfterSize = document.getElementById('stat-after-size')!;
+  const statSavingsBadge = document.getElementById('stat-savings-badge')!;
+  const optimizingSpinner = document.getElementById('optimizing-spinner')!;
+
+  // Side-by-side Elements
+  const canvasSideContainer = document.getElementById('canvas-side-container')!;
+  const sideOrigSize = document.getElementById('side-orig-size')!;
+  const sideOrigDims = document.getElementById('side-orig-dims')!;
+  const sideOptSize = document.getElementById('side-opt-size')!;
+  const sideOptSavings = document.getElementById('side-opt-savings')!;
+  const sideOrigPreviewBox = document.getElementById('side-orig-preview-box')!;
+  const sideOptPreviewBox = document.getElementById('side-opt-preview-box')!;
+  const sideOrigStage = document.getElementById('side-orig-stage')!;
+  const sideOptStage = document.getElementById('side-opt-stage')!;
+  const sideOriginalSvg = document.getElementById('side-original-svg')!;
+  const sideOptimizedSvg = document.getElementById('side-optimized-svg')!;
+  const sideQuickCopyBtn = document.getElementById('side-quick-copy-btn')!;
+
+  // Split View Elements
+  const canvasSplitContainer = document.getElementById('canvas-split-container')!;
+  const splitStage = document.getElementById('split-stage')!;
+  const splitOriginalLayer = document.getElementById('split-original-layer')!;
+  const splitOptimizedLayer = document.getElementById('split-optimized-layer')!;
+  const splitOriginalSvg = document.getElementById('split-original-svg')!;
+  const splitOptimizedSvg = document.getElementById('split-optimized-svg')!;
+  const splitHandle = document.getElementById('split-handle')!;
+  const labelOrigSize = document.getElementById('label-orig-size')!;
+  const labelOptSize = document.getElementById('label-opt-size')!;
+  const splitPos25 = document.getElementById('split-pos-25')!;
+  const splitPos50 = document.getElementById('split-pos-50')!;
+  const splitPos75 = document.getElementById('split-pos-75')!;
+
+  // Code View Elements
+  const canvasCodeContainer = document.getElementById('canvas-code-container')!;
+  const codeOrigText = document.getElementById('code-orig-text') as HTMLTextAreaElement;
+  const codeOptText = document.getElementById('code-opt-text') as HTMLTextAreaElement;
+  const codeOrigChars = document.getElementById('code-orig-chars')!;
+  const codeOptChars = document.getElementById('code-opt-chars')!;
+
+  // View & Zoom Toolbar
+  const viewSideBtn = document.getElementById('view-side-btn')!;
+  const viewSplitBtn = document.getElementById('view-split-btn')!;
+  const viewCodeBtn = document.getElementById('view-code-btn')!;
+  const zoomInBtn = document.getElementById('zoom-in-btn')!;
+  const zoomOutBtn = document.getElementById('zoom-out-btn')!;
+  const zoomResetBtn = document.getElementById('zoom-reset-btn')!;
+  const zoomLevelLabel = document.getElementById('zoom-level-label')!;
+
+  // Background Picker
+  const bgCheckerLight = document.getElementById('bg-checker-light')!;
+  const bgCheckerDark = document.getElementById('bg-checker-dark')!;
+  const bgWhite = document.getElementById('bg-white')!;
+  const bgBlack = document.getElementById('bg-black')!;
+
+  // Controls
+  const precisionSlider = document.getElementById('precision-slider') as HTMLInputElement;
+  const precisionValue = document.getElementById('precision-value')!;
+
+  // Action Buttons
+  const downloadSingleBtn = document.getElementById('download-single-btn')!;
+  const copySvgBtn = document.getElementById('copy-svg-btn')!;
+  const copyJsxBtn = document.getElementById('copy-jsx-btn')!;
+  const copyDataUriBtn = document.getElementById('copy-datauri-btn')!;
+
+  const toast = document.getElementById('toast')!;
+  const toastMessage = document.getElementById('toast-message')!;
+
+  // Toast Helper
+  function showToast(message: string) {
+    toastMessage.textContent = message;
+    toast.classList.remove('translate-y-10', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+    setTimeout(() => {
+      toast.classList.add('translate-y-10', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 2400);
+  }
+
+  // Scopes all element IDs and url(#id)/href="#id" references to avoid collisions across multiple SVGs in the DOM
+  function scopeSvgIds(svgCode: string, prefix: string): string {
+    const idRegex = /id="([^"]+)"/g;
+    const ids: string[] = [];
+    let match;
+    while ((match = idRegex.exec(svgCode)) !== null) {
+      if (!ids.includes(match[1])) {
+        ids.push(match[1]);
+      }
+    }
+
+    let result = svgCode;
+    ids.forEach((oldId) => {
+      const newId = `${prefix}_${oldId}`;
+      result = result.split(`id="${oldId}"`).join(`id="${newId}"`);
+      result = result.split(`url(#${oldId})`).join(`url(#${newId})`);
+      result = result.split(`url('#${oldId}')`).join(`url('#${newId}')`);
+      result = result.split(`url("#${oldId}")`).join(`url("#${newId}")`);
+      result = result.split(`href="#${oldId}"`).join(`href="#${newId}"`);
+      result = result.split(`xlink:href="#${oldId}"`).join(`xlink:href="#${newId}"`);
+    });
+
+    return result;
+  }
+
+  // Normalizes an SVG for reliable display in preview containers with scoped IDs and guaranteed viewBox
+  function prepareSvgPreview(svgCode: string, idPrefix: string): string {
+    try {
+      // Scope IDs first
+      const scoped = scopeSvgIds(svgCode, idPrefix);
+
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(scoped, 'image/svg+xml');
+      const svg = doc.querySelector('svg');
+      if (!svg) return scoped;
+
+      let viewBox = svg.getAttribute('viewBox');
+      const widthAttr = svg.getAttribute('width');
+      const heightAttr = svg.getAttribute('height');
+
+      // Synthesize viewBox if missing so vector graphic scales cleanly
+      if (!viewBox && widthAttr && heightAttr) {
+        const w = parseFloat(widthAttr.replace(/px$/, ''));
+        const h = parseFloat(heightAttr.replace(/px$/, ''));
+        if (!isNaN(w) && !isNaN(h) && w > 0 && h > 0) {
+          svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+        }
+      }
+
+      // Configure SVG attributes and styles to scale responsively
+      svg.setAttribute('width', '100%');
+      svg.setAttribute('height', '100%');
+      svg.style.width = '100%';
+      svg.style.height = '100%';
+      svg.style.maxWidth = '100%';
+      svg.style.maxHeight = '100%';
+      svg.style.display = 'block';
+      svg.style.margin = 'auto';
+
+      return new XMLSerializer().serializeToString(doc);
+    } catch {
+      return svgCode;
+    }
+  }
+
+  // Extract dimensions for display
+  function getSvgDimensions(svgCode: string): string {
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svgCode, 'image/svg+xml');
+      const svg = doc.querySelector('svg');
+      if (!svg) return '';
+      const viewBox = svg.getAttribute('viewBox');
+      if (viewBox) {
+        const parts = viewBox.trim().split(/[\s,]+/);
+        if (parts.length === 4) {
+          const w = Math.round(parseFloat(parts[2]));
+          const h = Math.round(parseFloat(parts[3]));
+          if (!isNaN(w) && !isNaN(h)) return `${w}×${h}px`;
+        }
+      }
+      const w = svg.getAttribute('width');
+      const h = svg.getAttribute('height');
+      if (w && h) {
+        const parsedW = Math.round(parseFloat(w));
+        const parsedH = Math.round(parseFloat(h));
+        if (!isNaN(parsedW) && !isNaN(parsedH)) return `${parsedW}×${parsedH}px`;
+      }
+      return '';
+    } catch {
+      return '';
+    }
+  }
+
+  // Switch Input Mode Tabs
+  function setInputTab(tab: 'upload' | 'paste' | 'sample') {
+    [uploadPanel, pastePanel, samplePanel].forEach(p => p.classList.add('hidden'));
+    [modeUploadTab, modePasteTab, modeSampleTab].forEach(t => {
+      t.className = 'flex items-center gap-1.5 rounded-[4px] px-3 py-1.5 text-xs font-medium text-[var(--color-body)] transition-all hover:text-[var(--color-ink)]';
+    });
+
+    const activeClasses = 'flex items-center gap-1.5 rounded-[4px] bg-[var(--color-primary)] px-3 py-1.5 text-xs font-medium text-[var(--color-on-primary)] transition-all';
+
+    if (tab === 'upload') {
+      uploadPanel.classList.remove('hidden');
+      modeUploadTab.className = activeClasses;
+    } else if (tab === 'paste') {
+      pastePanel.classList.remove('hidden');
+      modePasteTab.className = activeClasses;
+      pasteInput.focus();
+    } else {
+      samplePanel.classList.remove('hidden');
+      modeSampleTab.className = activeClasses;
+    }
+  }
+
+  modeUploadTab.addEventListener('click', () => setInputTab('upload'));
+  modePasteTab.addEventListener('click', () => setInputTab('paste'));
+  modeSampleTab.addEventListener('click', () => setInputTab('sample'));
+
+  // Switch View Mode (Side-by-Side vs Split Slider vs Code Diff)
+  function setViewMode(mode: 'side' | 'split' | 'code') {
+    currentViewMode = mode;
+    canvasSideContainer.classList.add('hidden');
+    canvasSideContainer.classList.remove('grid');
+    canvasSplitContainer.classList.add('hidden');
+    canvasSplitContainer.classList.remove('flex');
+    canvasCodeContainer.classList.add('hidden');
+    canvasCodeContainer.classList.remove('flex');
+
+    [viewSideBtn, viewSplitBtn, viewCodeBtn].forEach(b => {
+      b.className = 'rounded-[4px] px-2.5 py-1 text-xs font-medium text-[var(--color-body)] transition-all hover:text-[var(--color-ink)]';
+    });
+
+    const activeBtnClass = 'rounded-[4px] bg-[var(--color-canvas-elevated)] px-2.5 py-1 text-xs font-medium text-[var(--color-ink)] shadow-2xs transition-all';
+
+    if (mode === 'side') {
+      canvasSideContainer.classList.remove('hidden');
+      canvasSideContainer.classList.add('grid');
+      viewSideBtn.className = activeBtnClass;
+    } else if (mode === 'split') {
+      canvasSplitContainer.classList.remove('hidden');
+      canvasSplitContainer.classList.add('flex');
+      viewSplitBtn.className = activeBtnClass;
+      setSplitPercent(currentSplitPct);
+    } else {
+      canvasCodeContainer.classList.remove('hidden');
+      canvasCodeContainer.classList.add('flex');
+      viewCodeBtn.className = activeBtnClass;
+    }
+  }
+
+  viewSideBtn.addEventListener('click', () => setViewMode('side'));
+  viewSplitBtn.addEventListener('click', () => setViewMode('split'));
+  viewCodeBtn.addEventListener('click', () => setViewMode('code'));
+
+  // Apply Zoom Level
+  function updateZoom(newZoom: number) {
+    currentZoom = Math.min(2.5, Math.max(0.5, newZoom));
+    const label = `${Math.round(currentZoom * 100)}%`;
+    zoomLevelLabel.textContent = label;
+
+    const scaleStyle = `scale(${currentZoom})`;
+    sideOrigStage.style.transform = scaleStyle;
+    sideOptStage.style.transform = scaleStyle;
+    splitStage.style.transform = scaleStyle;
+  }
+
+  zoomInBtn.addEventListener('click', () => updateZoom(currentZoom + 0.25));
+  zoomOutBtn.addEventListener('click', () => updateZoom(currentZoom - 0.25));
+  zoomResetBtn.addEventListener('click', () => updateZoom(1));
+
+  // Canvas Background Toggle
+  function setCanvasBg(bgClass: string) {
+    [sideOrigPreviewBox, sideOptPreviewBox, canvasSplitContainer].forEach(c => {
+      c.classList.remove('bg-checkerboard-light', 'bg-checkerboard-dark', 'bg-white', 'bg-neutral-900');
+      c.classList.add(bgClass);
+    });
+    [bgCheckerLight, bgCheckerDark, bgWhite, bgBlack].forEach(b => b.classList.remove('ring-1', 'ring-[var(--color-ink)]'));
+  }
+
+  bgCheckerLight.addEventListener('click', () => { setCanvasBg('bg-checkerboard-light'); bgCheckerLight.classList.add('ring-1', 'ring-[var(--color-ink)]'); });
+  bgCheckerDark.addEventListener('click', () => { setCanvasBg('bg-checkerboard-dark'); bgCheckerDark.classList.add('ring-1', 'ring-[var(--color-ink)]'); });
+  bgWhite.addEventListener('click', () => { setCanvasBg('bg-white'); bgWhite.classList.add('ring-1', 'ring-[var(--color-ink)]'); });
+  bgBlack.addEventListener('click', () => { setCanvasBg('bg-neutral-900'); bgBlack.classList.add('ring-1', 'ring-[var(--color-ink)]'); });
+
+  // Update Split Position (Divider Handle)
+  function setSplitPercent(pct: number) {
+    currentSplitPct = Math.max(0, Math.min(100, pct));
+    splitHandle.style.left = `${currentSplitPct}%`;
+    splitOriginalLayer.style.clipPath = `polygon(0 0, ${currentSplitPct}% 0, ${currentSplitPct}% 100%, 0 100%)`;
+
+    // Update preset pills
+    [splitPos25, splitPos50, splitPos75].forEach(btn => {
+      btn.className = 'px-1.5 py-0.5 rounded-full hover:bg-neutral-100 text-[var(--color-body)]';
+    });
+    if (Math.round(currentSplitPct) === 25) splitPos25.className = 'px-1.5 py-0.5 rounded-full bg-[var(--color-primary)] text-white font-semibold';
+    if (Math.round(currentSplitPct) === 50) splitPos50.className = 'px-1.5 py-0.5 rounded-full bg-[var(--color-primary)] text-white font-semibold';
+    if (Math.round(currentSplitPct) === 75) splitPos75.className = 'px-1.5 py-0.5 rounded-full bg-[var(--color-primary)] text-white font-semibold';
+  }
+
+  splitPos25.addEventListener('click', () => setSplitPercent(25));
+  splitPos50.addEventListener('click', () => setSplitPercent(50));
+  splitPos75.addEventListener('click', () => setSplitPercent(75));
+
+  // Handle Dragging in Split View
+  function handleSplitDrag(e: MouseEvent | TouchEvent) {
+    if (!isDraggingSplit) return;
+    const rect = splitStage.getBoundingClientRect();
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const x = clientX - rect.left;
+    const pct = (x / rect.width) * 100;
+    setSplitPercent(pct);
+  }
+
+  splitHandle.addEventListener('mousedown', (e) => {
+    isDraggingSplit = true;
+    e.preventDefault();
+  });
+  canvasSplitContainer.addEventListener('mousedown', (e) => {
+    isDraggingSplit = true;
+    handleSplitDrag(e);
+  });
+  window.addEventListener('mousemove', handleSplitDrag);
+  window.addEventListener('mouseup', () => { isDraggingSplit = false; });
+
+  splitHandle.addEventListener('touchstart', (e) => {
+    isDraggingSplit = true;
+  }, { passive: true });
+  canvasSplitContainer.addEventListener('touchmove', handleSplitDrag, { passive: true });
+  window.addEventListener('touchend', () => { isDraggingSplit = false; });
+
+  // Optimize an individual queued item
+  function optimizeItem(item: QueuedItem): QueuedItem {
+    try {
+      const res = optimizeSvgString(item.originalSvg, activeOptions);
+      return { ...item, result: res, error: undefined };
+    } catch (err: any) {
+      return { ...item, error: err.message || 'Optimization failed' };
+    }
+  }
+
+  // Re-run optimization on current active item
+  function reoptimizeActive() {
+    if (queue.length === 0) return;
+    optimizingSpinner.classList.remove('hidden');
+    optimizingSpinner.classList.add('inline-flex');
+
+    setTimeout(() => {
+      queue[activeIndex] = optimizeItem(queue[activeIndex]);
+      optimizingSpinner.classList.add('hidden');
+      optimizingSpinner.classList.remove('inline-flex');
+      renderActiveItem();
+      renderQueue();
+    }, 20);
+  }
+
+  // Render active item in Studio
+  function renderActiveItem() {
+    if (queue.length === 0) {
+      studioContainer.classList.add('hidden');
+      return;
+    }
+    studioContainer.classList.remove('hidden');
+
+    const item = queue[activeIndex];
+    activeFilenameEl.textContent = item.name;
+
+    if (item.error) {
+      statBeforeSize.textContent = formatBytes(new Blob([item.originalSvg]).size);
+      statAfterSize.textContent = 'Error';
+      statSavingsBadge.textContent = item.error;
+      statSavingsBadge.className = 'rounded-full bg-red-500/10 px-2 py-0.5 font-mono text-[11px] font-medium text-red-600 dark:text-red-400';
+      return;
+    }
+
+    const res = item.result!;
+    const origSizeFormatted = formatBytes(res.originalSize);
+    const optSizeFormatted = formatBytes(res.optimizedSize);
+    const savingsFormatted = `-${res.savingsPercent}%`;
+    const dims = getSvgDimensions(res.originalSvg);
+
+    // Global Stats
+    statBeforeSize.textContent = origSizeFormatted;
+    statAfterSize.textContent = optSizeFormatted;
+    statSavingsBadge.textContent = `${savingsFormatted} (${formatBytes(res.savingsBytes)} saved)`;
+    statSavingsBadge.className = 'rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[11px] font-medium text-emerald-600 dark:text-emerald-400';
+
+    // Side-by-Side View Labels
+    sideOrigSize.textContent = origSizeFormatted;
+    sideOrigDims.textContent = dims;
+    sideOptSize.textContent = optSizeFormatted;
+    sideOptSavings.textContent = `${savingsFormatted} saved`;
+
+    // Split View Labels
+    labelOrigSize.textContent = origSizeFormatted;
+    labelOptSize.textContent = `${optSizeFormatted} (${savingsFormatted})`;
+
+    // Prepare normalized responsive SVG previews with UNIQUE SCOPED IDS to prevent paint server conflicts
+    const sideOrig = prepareSvgPreview(res.originalSvg, 'side_orig');
+    const sideOpt = prepareSvgPreview(res.optimizedSvg, 'side_opt');
+    const splitOrig = prepareSvgPreview(res.originalSvg, 'split_orig');
+    const splitOpt = prepareSvgPreview(res.optimizedSvg, 'split_opt');
+
+    // Inject into Side-by-Side View
+    sideOriginalSvg.innerHTML = sideOrig;
+    sideOptimizedSvg.innerHTML = sideOpt;
+
+    // Inject into Split View
+    splitOriginalSvg.innerHTML = splitOrig;
+    splitOptimizedSvg.innerHTML = splitOpt;
+
+    // Inject into Code Diff View
+    codeOrigText.value = res.originalSvg;
+    codeOptText.value = res.optimizedSvg;
+    codeOrigChars.textContent = res.originalSvg.length.toString();
+    codeOptChars.textContent = res.optimizedSvg.length.toString();
+
+    // Reset split to active percentage
+    setSplitPercent(currentSplitPct);
+  }
+
+  // Quick copy on side-by-side pane
+  sideQuickCopyBtn.addEventListener('click', () => {
+    if (queue.length === 0 || !queue[activeIndex].result) return;
+    navigator.clipboard.writeText(queue[activeIndex].result!.optimizedSvg).then(() => {
+      showToast('Clean SVG code copied!');
+    });
+  });
+
+  // Render Queue Strip
+  function renderQueue() {
+    if (queue.length <= 1) {
+      queueContainer.classList.add('hidden');
+      return;
+    }
+    queueContainer.classList.remove('hidden');
+    queueCount.textContent = queue.length.toString();
+
+    let totalOriginal = 0;
+    let totalOptimized = 0;
+
+    queueList.innerHTML = '';
+    queue.forEach((item, idx) => {
+      if (item.result) {
+        totalOriginal += item.result.originalSize;
+        totalOptimized += item.result.optimizedSize;
+      }
+
+      const card = document.createElement('div');
+      const isActive = idx === activeIndex;
+      card.className = `flex shrink-0 items-center gap-2.5 rounded-[8px] border px-3 py-2 text-xs transition-all cursor-pointer ${
+        isActive
+          ? 'border-[var(--color-primary)] bg-[var(--color-canvas-elevated)] shadow-2xs ring-1 ring-[var(--color-primary)]'
+          : 'border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)]/70 hover:bg-[var(--color-canvas-elevated)]'
+      }`;
+
+      const savingsText = item.result ? `-${item.result.savingsPercent}%` : 'Err';
+
+      card.innerHTML = `
+        <div class="flex flex-col">
+          <span class="font-medium text-[var(--color-ink)] truncate max-w-[110px]">${item.name}</span>
+          <span class="font-mono text-[10px] text-[var(--color-mute)]">${item.result ? formatBytes(item.result.optimizedSize) : 'Failed'}</span>
+        </div>
+        <span class="rounded-full bg-emerald-500/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">${savingsText}</span>
+        <button type="button" class="remove-queue-btn text-neutral-400 hover:text-red-500 font-bold ml-1 text-sm leading-none" title="Remove">&times;</button>
+      `;
+
+      card.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).classList.contains('remove-queue-btn')) {
+          e.stopPropagation();
+          queue.splice(idx, 1);
+          if (activeIndex >= queue.length) activeIndex = Math.max(0, queue.length - 1);
+          renderQueue();
+          renderActiveItem();
+          return;
+        }
+        activeIndex = idx;
+        renderQueue();
+        renderActiveItem();
+      });
+
+      queueList.appendChild(card);
+    });
+
+    const totalSaved = Math.max(0, totalOriginal - totalOptimized);
+    const totalPercent = totalOriginal > 0 ? Math.round((totalSaved / totalOriginal) * 1000) / 10 : 0;
+    queueSavingsSummary.textContent = `Total Saved: ${formatBytes(totalSaved)} (-${totalPercent}%)`;
+  }
+
+  // Add files to queue
+  function addFiles(files: FileList | File[]) {
+    const promises: Promise<QueuedItem>[] = [];
+
+    Array.from(files).forEach((file) => {
+      if (!file.name.endsWith('.svg') && !file.name.endsWith('.svgz') && file.type !== 'image/svg+xml') return;
+      const promise = new Promise<QueuedItem>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const content = e.target?.result as string;
+          resolve({
+            id: Math.random().toString(36).substring(2, 9),
+            name: file.name,
+            originalSvg: content,
+          });
+        };
+        reader.readAsText(file);
+      });
+      promises.push(promise);
+    });
+
+    Promise.all(promises).then((items) => {
+      if (items.length === 0) return;
+      const optimized = items.map((i) => optimizeItem(i));
+      queue = [...queue, ...optimized];
+      activeIndex = queue.length - items.length;
+      renderQueue();
+      renderActiveItem();
+      showToast(`Loaded ${items.length} SVG${items.length > 1 ? 's' : ''}`);
+    });
+  }
+
+  // File Input Change
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files && fileInput.files.length > 0) {
+      addFiles(fileInput.files);
+      fileInput.value = '';
+    }
+  });
+
+  // Drag and drop events
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      dropZone.classList.add('border-[var(--color-link)]', 'bg-[var(--color-hairline-soft)]');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[var(--color-link)]', 'bg-[var(--color-hairline-soft)]');
+    });
+  });
+
+  dropZone.addEventListener('drop', (e: DragEvent) => {
+    if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
+      addFiles(e.dataTransfer.files);
+    }
+  });
+
+  // Paste SVG Code Handling
+  applyPasteBtn.addEventListener('click', () => {
+    const val = pasteInput.value.trim();
+    if (!val || !val.includes('<svg')) {
+      pasteError.classList.remove('hidden');
+      return;
+    }
+    pasteError.classList.add('hidden');
+    const newItem: QueuedItem = {
+      id: Math.random().toString(36).substring(2, 9),
+      name: `pasted-icon-${queue.length + 1}.svg`,
+      originalSvg: val,
+    };
+    queue.push(optimizeItem(newItem));
+    activeIndex = queue.length - 1;
+    renderQueue();
+    renderActiveItem();
+    showToast('Pasted SVG optimized!');
+  });
+
+  clearPasteBtn.addEventListener('click', () => {
+    pasteInput.value = '';
+    pasteError.classList.add('hidden');
+  });
+
+  // Sample SVGs Buttons
+  document.querySelectorAll('.sample-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const sampleId = btn.getAttribute('data-sample');
+      const found = SAMPLE_SVGS.find((s) => s.id === sampleId);
+      if (found) {
+        const newItem: QueuedItem = {
+          id: Math.random().toString(36).substring(2, 9),
+          name: `${found.id}.svg`,
+          originalSvg: found.svg,
+        };
+        queue.push(optimizeItem(newItem));
+        activeIndex = queue.length - 1;
+        renderQueue();
+        renderActiveItem();
+        showToast(`Loaded "${found.name}"`);
+      }
+    });
+  });
+
+  // Clear all button
+  clearAllBtn.addEventListener('click', () => {
+    queue = [];
+    activeIndex = 0;
+    renderQueue();
+    renderActiveItem();
+    showToast('Queue cleared');
+  });
+
+  // Preset buttons
+  document.querySelectorAll('.preset-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const presetKey = btn.getAttribute('data-preset');
+      if (presetKey && PRESETS[presetKey]) {
+        activeOptions = { ...DEFAULT_OPTIONS, ...PRESETS[presetKey] };
+
+        // Update UI buttons
+        document.querySelectorAll('.preset-btn').forEach((b) => {
+          b.className = 'preset-btn rounded-[6px] border border-[var(--color-hairline)] bg-[var(--color-canvas-elevated)] px-2.5 py-1.5 text-center text-xs font-medium text-[var(--color-body)] transition-all hover:bg-[var(--color-hairline-soft)] hover:text-[var(--color-ink)]';
+        });
+        btn.className = 'preset-btn rounded-[6px] border border-[var(--color-ink)] bg-[var(--color-primary)] px-2.5 py-1.5 text-center text-xs font-medium text-[var(--color-on-primary)] shadow-2xs transition-all';
+
+        // Update precision slider and checkboxes
+        precisionSlider.value = activeOptions.floatPrecision.toString();
+        precisionValue.textContent = `${activeOptions.floatPrecision} decimals`;
+
+        (document.getElementById('opt-metadata') as HTMLInputElement).checked = activeOptions.removeMetadata;
+        (document.getElementById('opt-editor') as HTMLInputElement).checked = activeOptions.removeEditorsNSData;
+        (document.getElementById('opt-comments') as HTMLInputElement).checked = activeOptions.removeComments;
+        (document.getElementById('opt-empty-tags') as HTMLInputElement).checked = activeOptions.removeEmptyContainers;
+        (document.getElementById('opt-hidden') as HTMLInputElement).checked = activeOptions.removeHiddenElems;
+        (document.getElementById('opt-cleanup-attrs') as HTMLInputElement).checked = activeOptions.cleanupAttrs;
+        (document.getElementById('opt-colors') as HTMLInputElement).checked = activeOptions.convertColors;
+        (document.getElementById('opt-styles') as HTMLInputElement).checked = activeOptions.convertStyleToAttrs;
+        (document.getElementById('opt-namespaces') as HTMLInputElement).checked = activeOptions.removeUnusedNS;
+        (document.getElementById('opt-ids') as HTMLInputElement).checked = activeOptions.cleanupIds;
+        (document.getElementById('opt-multipass') as HTMLInputElement).checked = activeOptions.multipass;
+
+        reoptimizeActive();
+      }
+    });
+  });
+
+  // Precision slider
+  precisionSlider.addEventListener('input', () => {
+    const val = parseInt(precisionSlider.value, 10);
+    activeOptions.floatPrecision = val;
+    precisionValue.textContent = `${val} decimals`;
+    reoptimizeActive();
+  });
+
+  // Toggles change
+  const toggleMap: Record<string, keyof OptimizationOptions> = {
+    'opt-metadata': 'removeMetadata',
+    'opt-editor': 'removeEditorsNSData',
+    'opt-comments': 'removeComments',
+    'opt-empty-tags': 'removeEmptyContainers',
+    'opt-hidden': 'removeHiddenElems',
+    'opt-cleanup-attrs': 'cleanupAttrs',
+    'opt-colors': 'convertColors',
+    'opt-styles': 'convertStyleToAttrs',
+    'opt-namespaces': 'removeUnusedNS',
+    'opt-ids': 'cleanupIds',
+    'opt-multipass': 'multipass',
+  };
+
+  Object.entries(toggleMap).forEach(([id, optKey]) => {
+    const el = document.getElementById(id) as HTMLInputElement;
+    el?.addEventListener('change', () => {
+      (activeOptions as any)[optKey] = el.checked;
+      reoptimizeActive();
+    });
+  });
+
+  document.getElementById('toggle-all-btn')?.addEventListener('click', () => {
+    activeOptions = { ...DEFAULT_OPTIONS };
+    precisionSlider.value = '3';
+    precisionValue.textContent = '3 decimals';
+    Object.entries(toggleMap).forEach(([id, optKey]) => {
+      const el = document.getElementById(id) as HTMLInputElement;
+      if (el) el.checked = Boolean(DEFAULT_OPTIONS[optKey]);
+    });
+    reoptimizeActive();
+    showToast('Reset to default options');
+  });
+
+  // Download Single SVG
+  downloadSingleBtn.addEventListener('click', () => {
+    if (queue.length === 0 || !queue[activeIndex].result) return;
+    const item = queue[activeIndex];
+    const blob = new Blob([item.result!.optimizedSvg], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = item.name.replace(/\.svg$/, '') + '.min.svg';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast(`Downloaded ${a.download}`);
+  });
+
+  // Download All as ZIP
+  downloadAllZipBtn.addEventListener('click', async () => {
+    if (queue.length === 0) return;
+    const filesToZip = queue
+      .filter((q) => q.result)
+      .map((q) => ({
+        name: q.name.replace(/\.svg$/, '') + '.min.svg',
+        content: q.result!.optimizedSvg,
+      }));
+
+    if (filesToZip.length === 0) return;
+    downloadAllZipBtn.textContent = 'Compressing ZIP...';
+    try {
+      const zipBlob = await createZipBundle(filesToZip);
+      const url = URL.createObjectURL(zipBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `svgcleankit-bundle-${Date.now()}.zip`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`ZIP downloaded (${filesToZip.length} files)`);
+    } catch (err: any) {
+      showToast('Error creating ZIP bundle');
+    } finally {
+      downloadAllZipBtn.innerHTML = `
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 16.5v-2.25m-9-6.75v9m0 0 3.75-3.75M12 18.75 8.25 15M12 3v9" />
+        </svg>
+        Save All as ZIP
+      `;
+    }
+  });
+
+  // Copy SVG Code
+  copySvgBtn.addEventListener('click', () => {
+    if (queue.length === 0 || !queue[activeIndex].result) return;
+    navigator.clipboard.writeText(queue[activeIndex].result!.optimizedSvg).then(() => {
+      showToast('Optimized SVG code copied!');
+    });
+  });
+
+  // Copy as JSX
+  copyJsxBtn.addEventListener('click', () => {
+    if (queue.length === 0 || !queue[activeIndex].result) return;
+    const jsx = convertToJsx(queue[activeIndex].result!.optimizedSvg);
+    navigator.clipboard.writeText(jsx).then(() => {
+      showToast('React JSX component copied!');
+    });
+  });
+
+  // Copy as Data URI
+  copyDataUriBtn.addEventListener('click', () => {
+    if (queue.length === 0 || !queue[activeIndex].result) return;
+    const dataUri = convertToDataUri(queue[activeIndex].result!.optimizedSvg);
+    navigator.clipboard.writeText(dataUri).then(() => {
+      showToast('Data URI copied!');
+    });
+  });
+
+  // Initialize with the first sample SVG immediately
+  window.addEventListener('DOMContentLoaded', () => {
+    const firstSample = SAMPLE_SVGS[0];
+    const initialItem: QueuedItem = {
+      id: 'init-badge',
+      name: `${firstSample.id}.svg`,
+      originalSvg: firstSample.svg,
+    };
+    queue.push(optimizeItem(initialItem));
+    activeIndex = 0;
+    renderActiveItem();
+  });
+</script>

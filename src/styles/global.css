@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #171717;
+  --color-on-primary: #ffffff;
+  --color-ink: #171717;
+  --color-body: #4d4d4d;
+  --color-mute: #8f8f8f;
+  --color-faint: #a1a1a1;
+  --color-hairline: #ebebeb;
+  --color-hairline-soft: #f2f2f2;
+  --color-canvas: #fafafa;
+  --color-canvas-elevated: #ffffff;
+  --color-link: #0070f3;
+  --color-link-deep: #0761d1;
+  --color-link-soft: #d3e5ff;
+  --color-error: #ee0000;
+  --color-error-deep: #c50000;
+  --color-warning: #f5a623;
+  --color-warning-soft: #ffefcf;
+  --color-warning-deep: #ab570a;
+  --color-violet: #7928ca;
+  --color-violet-soft: #d8ccf1;
+  --color-cyan: #50e3c2;
+  --color-cyan-soft: #aaffec;
+  --color-pink: #ff0080;
+  --color-magenta: #eb367f;
+
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill-category: 64px;
+  --radius-pill: 100px;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-primary: #171717;
+  --color-on-primary: #ffffff;
+  --color-canvas: #fafafa;
+  --color-canvas-elevated: #ffffff;
+  --color-ink: #171717;
+  --color-body: #4d4d4d;
+  --color-mute: #8f8f8f;
+  --color-faint: #a1a1a1;
+  --color-hairline: #ebebeb;
+  --color-hairline-soft: #f2f2f2;
+}
+
+.dark {
+  --color-primary: #ffffff;
+  --color-on-primary: #000000;
+  --color-canvas: #000000;
+  --color-canvas-elevated: #0a0a0a;
+  --color-ink: #ededed;
+  --color-body: #a1a1a1;
+  --color-mute: #737373;
+  --color-faint: #404040;
+  --color-hairline: #262626;
+  --color-hairline-soft: #171717;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* Hero mesh gradient from DESIGN.md */
+.mesh-gradient-glow {
+  background: radial-gradient(circle at 50% 30%, rgba(0, 124, 240, 0.08) 0%, transparent 60%),
+              radial-gradient(circle at 30% 20%, rgba(121, 40, 202, 0.07) 0%, transparent 50%),
+              radial-gradient(circle at 70% 25%, rgba(255, 0, 128, 0.06) 0%, transparent 50%),
+              radial-gradient(circle at 60% 40%, rgba(80, 227, 194, 0.07) 0%, transparent 55%),
+              radial-gradient(circle at 40% 45%, rgba(249, 203, 40, 0.05) 0%, transparent 50%);
+}
+
+/* Subtle checkerboard pattern for transparent SVG inspection */
+.bg-checkerboard-light {
+  background-color: #ffffff;
+  background-image: linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+                    linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+                    linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+}
+
+.bg-checkerboard-dark {
+  background-color: #121212;
+  background-image: linear-gradient(45deg, #1c1c1c 25%, transparent 25%),
+                    linear-gradient(-45deg, #1c1c1c 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, #1c1c1c 75%),
+                    linear-gradient(-45deg, transparent 75%, #1c1c1c 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+}
+
+/* Custom scrollbars matching Geist aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #2e2e2e;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #474747;
+}
+
+/* Responsive SVG rendering in comparison viewports */
+.svg-preview-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.svg-preview-stage svg {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  margin: auto !important;
+  pointer-events: none;
+}
